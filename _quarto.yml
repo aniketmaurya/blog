@@ -11,10 +11,12 @@ website:
         href: https://github.com/aniketmaurya
       - icon: twitter
         href: https://twitter.com/aniketmaurya
+  twitter-card: true
+  google-analytics: "UA-156199072-2"
+
 format:
   html:
-    theme: cosmo
+    theme:
+      light: cosmo
+      dark: darkly
     css: styles.css
-
-
-
