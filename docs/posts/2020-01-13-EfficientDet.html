@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.269">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="dcterms.date" content="2020-01-13">
+<meta name="keywords" content="object detection, efficientdet, google, automl, efficientnet">
+<meta name="description" content="EfficientDet, highly efficient and scalable state of the art object detection model developed by Google Research, Brain Team.">
+
+<title>AI with Aniket - EfficientDet: When Object Detection Meets Scalability and Efficiency</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">AI with Aniket</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../about.html">
+ <span class="menu-text">About</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/aniketmaurya"><i class="bi bi-github" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://twitter.com/aniketmaurya"><i class="bi bi-twitter" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+</ul>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">EfficientDet: When Object Detection Meets Scalability and Efficiency</h1>
+                  <div>
+        <div class="description">
+          EfficientDet, highly efficient and scalable state of the art object detection model developed by Google Research, Brain Team.
+        </div>
+      </div>
+                          <div class="quarto-categories">
+                <div class="quarto-category">Object Detection</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">January 13, 2020</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#quick-overview-of-the-paper" id="toc-quick-overview-of-the-paper" class="nav-link active" data-scroll-target="#quick-overview-of-the-paper">Quick Overview of the Paper</a></li>
+  <li><a href="#bifpn" id="toc-bifpn" class="nav-link" data-scroll-target="#bifpn">BiFPN</a></li>
+  <li><a href="#weighted-feature-fusion" id="toc-weighted-feature-fusion" class="nav-link" data-scroll-target="#weighted-feature-fusion">Weighted Feature Fusion</a></li>
+  <li><a href="#efficientdet-architecture" id="toc-efficientdet-architecture" class="nav-link" data-scroll-target="#efficientdet-architecture">EfficientDet Architecture</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+<p>EfficientDet, a highly efficient and scalable state of the art object detection model developed by Google Research, Brain Team. It is not just a single model. It has a family of detectors which achieve better accuracy with an order-of-magnitude fewer parameters and FLOPS than previous object detectors.</p>
+<p>EfficientDet paper has mentioned its 7 family members.</p>
+<blockquote class="blockquote">
+<h3 id="comparison-of-efficientdet-detectors06-with-other-sota-object-detection-models." class="anchored">Comparison of EfficientDet detectors[0–6] with other SOTA object detection models.</h3>
+</blockquote>
+<p><img src="https://cdn-images-1.medium.com/max/3360/1*wVXzRV58CNjHMV24FMFz7g.png" class="img-fluid" alt="Source: arXiv:1911.09070v1"><em>Source: <a href="https://arxiv.org/abs/1911.09070">arXiv:1911.09070v1</a></em></p>
+<section id="quick-overview-of-the-paper" class="level2">
+<h2 class="anchored" data-anchor-id="quick-overview-of-the-paper">Quick Overview of the Paper</h2>
+<ol type="1">
+<li><p><strong><a href="https://arxiv.org/abs/1905.11946">EfficientNet</a></strong> is the backbone architecture used in the model. EfficientNet is also written by the same authors at Google. Conventional CNN models arbitrarily scaled network dimensions- <em>width, depth and resolution</em>. EfficientNet uniformly scales each dimension with a fixed set of scaling coefficients. It surpassed SOTA accuracy with 10x efficiency.</p></li>
+<li><p><strong>BiFPN</strong>: While <em>fusing</em> (applying <a href="https://arxiv.org/abs/1512.03385">residual or skip connections</a>) different input features, most of the works simply summed them up without any distinction. Since both input features are at the different resolutions they don’t equally contribute to the fused output layer. The paper proposes a weighted bi-directional feature pyramid network (BiFPN), which introduces learnable weights to learn the importance of different input features.</p></li>
+<li><p><strong>Compound Scaling</strong>: For higher accuracy previous object detection models relied on — bigger backbone or larger input image sizes. Compound Scaling is a method that uses a simple compound coefficient <strong>φ</strong> to jointly scale-up all dimensions of the backbone network, BiFPN network, class/box network, and resolution.</p></li>
+</ol>
+<blockquote class="blockquote">
+<p>Combining EfficientNet backbones with our propose BiFPN and compound scaling, we have developed a new family of object detectors, named EfficientDet, which consistently achieve better accuracy with an order-of-magnitude fewer parameters and FLOPS than previous object detectors.</p>
+</blockquote>
+</section>
+<section id="bifpn" class="level2">
+<h2 class="anchored" data-anchor-id="bifpn">BiFPN</h2>
+<p><img src="https://cdn-images-1.medium.com/max/2000/1*ZqkRP7n8Xh-PILCuX1510A.png" class="img-fluid" alt="Source: arXiv:1911.09070v1 — figure 2"><em>Source: <a href="https://arxiv.org/abs/1911.09070">arXiv:1911.09070v1</a> — figure 2</em></p>
+<p>Conventional FPN (Feature Pyramid Network) is limited by the one-way information flow. <a href="https://arxiv.org/pdf/1803.01534.pdf">PANet</a> added an extra bottom-up path for information flow. PANet achieved better accuracy but with the cost and more parameters and computations. The paper proposed several optimizations for cross-scale connections:</p>
+<ol type="1">
+<li><p>Remove Nodes that only have one input edge. <em>If a node has only one input edge with no feature fusion, then it will have less contribution to the feature network that aims at fusing different features.</em></p></li>
+<li><p>Add an extra edge from the original input to output node if they are at the same level, in order to fuse more features without adding much cost.</p></li>
+<li><p>Treat each bidirectional (top-down &amp; bottom-up) path as one feature network layer, and repeat the same layer multiple times to enable more high-level feature fusion.</p></li>
+</ol>
+</section>
+<section id="weighted-feature-fusion" class="level2">
+<h2 class="anchored" data-anchor-id="weighted-feature-fusion">Weighted Feature Fusion</h2>
+<p>While multi-scale fusion, input features are not simply summed up. The authors proposed to add additional weight for each input during feature fusion and let the network to learn the importance of each input feature. Out of three weighted fusion approaches — <strong>Unbounded fusion:</strong></p>
+<p><img src="https://cdn-images-1.medium.com/max/2000/1*rv-MpuUiv-uVs5Trx4XI1Q.png" class="img-fluid" alt="Source: https://arxiv.org/abs/1911.09070"><em>Source: <a href="https://arxiv.org/abs/1911.09070">https://arxiv.org/abs/1911.09070</a></em></p>
+<p>Where <em>W</em> is a learnable weight that can be a scalar (per-feature), a vector (per-channel), or a multi-dimensional tensor (per-pixel). Since the scalar weight is unbounded, it could potentially cause training instability. So, Softmax-based fusion was tried for normalized weights. <strong>Softmax-based fusion:</strong></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://cdn-images-1.medium.com/max/2000/1*AhA54rA3NcNFEuosOac_YA.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Source: <a href="https://arxiv.org/abs/1911.09070">https://arxiv.org/abs/1911.09070</a></figcaption><p></p>
+</figure>
+</div>
+<p>As softmax normalizes the weights to be the probability of range 0 to 1 which can denote the importance of each input. The softmax leads to a slowdown on GPU. <strong>Fast normalized fusion:</strong></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://cdn-images-1.medium.com/max/2000/1*AO0A5dDSJl0GKeUvYYc4cQ.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Source: <a href="https://arxiv.org/abs/1911.09070">https://arxiv.org/abs/1911.09070</a></figcaption><p></p>
+</figure>
+</div>
+<p>Є is added for numeric stability. It is 30% faster on GPU and gave almost as accurate results as softmax. &gt; Final BiFPN integrates both the bidirectional cross-scale connections and the fast normalized fusion.</p>
+</section>
+<section id="efficientdet-architecture" class="level2">
+<h2 class="anchored" data-anchor-id="efficientdet-architecture">EfficientDet Architecture</h2>
+<p><img src="https://cdn-images-1.medium.com/max/4062/1*nP0LlBoz0Uqhd17T4bINzg.png" class="img-fluid" alt="Source: arXiv:1911.09070v1 — figure 3"><em>Source: <a href="https://arxiv.org/abs/1911.09070">arXiv:1911.09070v1</a> — figure 3</em></p>
+<p>EfficientDet follows one-stage-detection paradigm. A pre-trained EfficientNet backbone is used with BiFPN as the feature extractor. BiFPNN takes {P3, P4, P5, P6, P7} features from the EfficientNet backbone network and repeatedly applies bidirectional feature fusion. The fused features are fed to a class and bounding box network for predicting object class and bounding box.</p>
+</section>
+<section id="references" class="level2">
+<h2 class="anchored" data-anchor-id="references">References</h2>
+<p><a href="https://arxiv.org/abs/1911.09070">EfficientDet: Scalable and Efficient Object Detection</a></p>
+<p><a href="https://arxiv.org/abs/1905.11946">EfficientNet: Rethinking Model Scaling for Convolutional Neural Networks</a></p>
+<p><a href="https://arxiv.org/abs/1803.01534">Path Aggregation Network for Instance Segmentation</a></p>
+<p><a href="https://arxiv.org/abs/1512.03385">Deep Residual Learning for Image Recognition</a></p>
+<hr>
+<p><br> &gt; Hope you liked the article.</p>
+<p>👉 <a href="https://twitter.com/aniketmaurya">Twitter</a>: <a href="https://twitter.com/aniketmaurya">https://twitter.com/aniketmaurya</a> 👉 Mail: aniketmaurya@outlook.com</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

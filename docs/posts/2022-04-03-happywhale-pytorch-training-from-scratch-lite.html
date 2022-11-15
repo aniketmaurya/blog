@@ -1,0 +1,860 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.269">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="dcterms.date" content="2022-04-03">
+<meta name="keywords" content="PyTorch, deep learning, kaggle, Lightning">
+<meta name="description" content="Learn how to write a custom training loop in pure PyTorch, create custom torch Dataset class, compute metrics for model performance, and Scale the Training on any hardware like GPU, TPU, IPU or Distributed Training with LightningLite.">
+
+<title>AI with Aniket - HappyWhale 🐳:PyTorch Training from scratch Lite ⚡️</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+<script src="https://unpkg.com/@jupyter-widgets/html-manager@*/dist/embed-amd.js" crossorigin="anonymous"></script>
+
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">AI with Aniket</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../about.html">
+ <span class="menu-text">About</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/aniketmaurya"><i class="bi bi-github" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://twitter.com/aniketmaurya"><i class="bi bi-twitter" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+</ul>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">HappyWhale 🐳:PyTorch Training from scratch Lite ⚡️</h1>
+                  <div>
+        <div class="description">
+          Learn how to write a custom training loop in pure PyTorch, create custom torch Dataset class, compute metrics for model performance, and Scale the Training on any hardware like GPU, TPU, IPU or Distributed Training with LightningLite.
+        </div>
+      </div>
+                          <div class="quarto-categories">
+                <div class="quarto-category">kaggle</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">April 3, 2022</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#explore-the-provided-data" id="toc-explore-the-provided-data" class="nav-link active" data-scroll-target="#explore-the-provided-data">🕵 Explore the provided data</a>
+  <ul class="collapse">
+  <li><a href="#browsing-the-metadata" id="toc-browsing-the-metadata" class="nav-link" data-scroll-target="#browsing-the-metadata">Browsing the metadata</a></li>
+  <li><a href="#browse-some-images" id="toc-browse-some-images" class="nav-link" data-scroll-target="#browse-some-images">Browse some images</a></li>
+  </ul></li>
+  <li><a href="#create-dataloader" id="toc-create-dataloader" class="nav-link" data-scroll-target="#create-dataloader">Create DataLoader 🗄️</a></li>
+  <li><a href="#write-training-loop" id="toc-write-training-loop" class="nav-link" data-scroll-target="#write-training-loop">Write Training Loop 🛠️</a>
+  <ul class="collapse">
+  <li><a href="#training-loop" id="toc-training-loop" class="nav-link" data-scroll-target="#training-loop">Training Loop</a></li>
+  </ul></li>
+  <li><a href="#scale-model-training" id="toc-scale-model-training" class="nav-link" data-scroll-target="#scale-model-training">👷 Scale Model Training</a>
+  <ul class="collapse">
+  <li><a href="#happy-training" id="toc-happy-training" class="nav-link" data-scroll-target="#happy-training">Happy Training! ⚡️🎉</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+<p>In this Notebook article, you will learn how to write a custom training loop in pure PyTorch, create custom torch <code>Dataset</code> class, compute metrics for model performance, and Scale the Training on any hardware like GPU, TPU, IPU or Distributed Training with <a href="https://devblog.pytorchlightning.ai/scale-your-pytorch-code-with-lightninglite-d5692a303f00">LightningLite</a>.</p>
+<p>Checkout the original <a href="https://www.kaggle.com/code/aniketmaurya/happywhale-pytorch-training-from-scratch-lite">Kaggle Notebook here.</a></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://images.pexels.com/photos/417196/pexels-photo-417196.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1260&amp;h=750&amp;dpr=2" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Photo by Pixabay from Pexels</figcaption><p></p>
+</figure>
+</div>
+<section id="explore-the-provided-data" class="level1">
+<h1>🕵 Explore the provided data</h1>
+<p>(EDA is taken from <a href="https://www.kaggle.com/code/jirkaborovec/whale-dolphin-eda-classify-lit-flash?scriptVersionId=89274025">Notebook</a> of Jirka)</p>
+<p>::: {.cell _cell_guid=‘b1076dfc-b9ad-4769-8c92-a6c4dae69d19’ _uuid=‘8f2839f25d086af736a60e9eeb907d3b93b6e0e5’ execution=‘{“iopub.execute_input”:“2022-04-02T18:40:32.594470Z”,“iopub.status.busy”:“2022-04-02T18:40:32.592959Z”,“iopub.status.idle”:“2022-04-02T18:40:33.259442Z”,“shell.execute_reply”:“2022-04-02T18:40:33.258804Z”,“shell.execute_reply.started”:“2022-04-02T18:23:21.539634Z”}’ papermill=‘{“duration”:0.690687,“end_time”:“2022-04-02T18:40:33.259589”,“exception”:false,“start_time”:“2022-04-02T18:40:32.568902”,“status”:“completed”}’ tags=‘[]’ execution_count=1}</p>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>ls <span class="op">-</span>l <span class="op">/</span>kaggle<span class="op">/</span><span class="bu">input</span><span class="op">/</span>happy<span class="op">-</span>whale<span class="op">-</span><span class="kw">and</span><span class="op">-</span>dolphin</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>PATH_DATASET <span class="op">=</span> <span class="st">"/kaggle/input/happy-whale-and-dolphin"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>total 4668
+-rw-r--r-- 1 nobody nogroup 2404234 Feb  1 16:45 sample_submission.csv
+drwxr-xr-x 2 nobody nogroup       0 Feb  1 16:47 test_images
+-rw-r--r-- 1 nobody nogroup 2371769 Feb  1 16:47 train.csv
+drwxr-xr-x 2 nobody nogroup       0 Feb  1 16:51 train_images</code></pre>
+</div>
+<p>:::</p>
+<section id="browsing-the-metadata" class="level3">
+<h3 class="anchored" data-anchor-id="browsing-the-metadata">Browsing the metadata</h3>
+<div class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2022-04-02T18:40:33.355815Z&quot;,&quot;iopub.status.busy&quot;:&quot;2022-04-02T18:40:33.355123Z&quot;,&quot;iopub.status.idle&quot;:&quot;2022-04-02T18:40:34.429745Z&quot;,&quot;shell.execute_reply&quot;:&quot;2022-04-02T18:40:34.429095Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2022-04-02T18:23:22.346758Z&quot;}" data-papermill="{&quot;duration&quot;:1.102946,&quot;end_time&quot;:&quot;2022-04-02T18:40:34.429902&quot;,&quot;exception&quot;:false,&quot;start_time&quot;:&quot;2022-04-02T18:40:33.326956&quot;,&quot;status&quot;:&quot;completed&quot;}" data-tags="[]" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sn</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>sn.<span class="bu">set</span>()</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>df_train <span class="op">=</span> pd.read_csv(os.path.join(PATH_DATASET, <span class="st">"train.csv"</span>))</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>display(df_train.head())</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Dataset size: </span><span class="sc">{</span><span class="bu">len</span>(df_train)<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Unique ids: </span><span class="sc">{</span><span class="bu">len</span>(df_train[<span class="st">'individual_id'</span>].unique())<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+
+<div>
+
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>image</th>
+      <th>species</th>
+      <th>individual_id</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>00021adfb725ed.jpg</td>
+      <td>melon_headed_whale</td>
+      <td>cadddb1636b9</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>000562241d384d.jpg</td>
+      <td>humpback_whale</td>
+      <td>1a71fbb72250</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0007c33415ce37.jpg</td>
+      <td>false_killer_whale</td>
+      <td>60008f293a2b</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0007d9bca26a99.jpg</td>
+      <td>bottlenose_dolphin</td>
+      <td>4b00fe572063</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>00087baf5cef7a.jpg</td>
+      <td>humpback_whale</td>
+      <td>8e5253662392</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Dataset size: 51033
+Unique ids: 15587</code></pre>
+</div>
+</div>
+<p>Lets see how many speaced we have in the database…</p>
+<div class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2022-04-02T18:40:34.538065Z&quot;,&quot;iopub.status.busy&quot;:&quot;2022-04-02T18:40:34.537481Z&quot;,&quot;iopub.status.idle&quot;:&quot;2022-04-02T18:40:35.723588Z&quot;,&quot;shell.execute_reply&quot;:&quot;2022-04-02T18:40:35.724027Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2022-04-02T18:23:22.964901Z&quot;}" data-papermill="{&quot;duration&quot;:1.226521,&quot;end_time&quot;:&quot;2022-04-02T18:40:35.724172&quot;,&quot;exception&quot;:false,&quot;start_time&quot;:&quot;2022-04-02T18:40:34.497651&quot;,&quot;status&quot;:&quot;completed&quot;}" data-tags="[]" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>counts_imgs <span class="op">=</span> df_train[<span class="st">"species"</span>].value_counts()</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>counts_inds <span class="op">=</span> df_train.drop_duplicates(<span class="st">"individual_id"</span>)[<span class="st">"species"</span>].value_counts()</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> pd.concat({<span class="st">"per Images"</span>: counts_imgs, <span class="st">"per Individuals"</span>: counts_inds}, axis<span class="op">=</span><span class="dv">1</span>).plot.barh(grid<span class="op">=</span><span class="va">True</span>, figsize<span class="op">=</span>(<span class="dv">7</span>, <span class="dv">10</span>))</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>ax.set_xscale(<span class="st">'log'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img src="2022-04-03-happywhale-pytorch-training-from-scratch-lite_files/figure-html/cell-4-output-1.png" class="img-fluid"></p>
+</div>
+</div>
+<p>And compare they with unique individuals…</p>
+<p><strong>Note:</strong> that the counts are in log scale</p>
+<div class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2022-04-02T18:40:35.830037Z&quot;,&quot;iopub.status.busy&quot;:&quot;2022-04-02T18:40:35.829256Z&quot;,&quot;iopub.status.idle&quot;:&quot;2022-04-02T18:40:35.896540Z&quot;,&quot;shell.execute_reply&quot;:&quot;2022-04-02T18:40:35.896035Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2022-04-02T18:23:24.663499Z&quot;}" data-papermill="{&quot;duration&quot;:0.100122,&quot;end_time&quot;:&quot;2022-04-02T18:40:35.896710&quot;,&quot;exception&quot;:false,&quot;start_time&quot;:&quot;2022-04-02T18:40:35.796588&quot;,&quot;status&quot;:&quot;completed&quot;}" data-tags="[]" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pprint <span class="im">import</span> pprint</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>species_individuals <span class="op">=</span> {}</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> name, dfg <span class="kw">in</span> df_train.groupby(<span class="st">"species"</span>):</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    species_individuals[name] <span class="op">=</span> dfg[<span class="st">"individual_id"</span>].value_counts()</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>si_max <span class="op">=</span> <span class="bu">max</span>(<span class="bu">list</span>(<span class="bu">map</span>(<span class="bu">len</span>, species_individuals.values())))</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>si <span class="op">=</span> {n: [<span class="dv">0</span>] <span class="op">*</span> si_max <span class="cf">for</span> n <span class="kw">in</span> species_individuals}</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> n, counts <span class="kw">in</span> species_individuals.items():</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>    si[n][:<span class="bu">len</span>(counts)] <span class="op">=</span> <span class="bu">list</span>(np.log(counts))</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>si <span class="op">=</span> pd.DataFrame(si)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2022-04-02T18:40:35.972501Z&quot;,&quot;iopub.status.busy&quot;:&quot;2022-04-02T18:40:35.969079Z&quot;,&quot;iopub.status.idle&quot;:&quot;2022-04-02T18:40:36.897657Z&quot;,&quot;shell.execute_reply&quot;:&quot;2022-04-02T18:40:36.898096Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2022-04-02T18:23:24.788676Z&quot;}" data-papermill="{&quot;duration&quot;:0.975921,&quot;end_time&quot;:&quot;2022-04-02T18:40:36.898242&quot;,&quot;exception&quot;:false,&quot;start_time&quot;:&quot;2022-04-02T18:40:35.922321&quot;,&quot;status&quot;:&quot;completed&quot;}" data-tags="[]" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sn</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">8</span>))</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> sn.heatmap(si[:<span class="dv">500</span>].T, cmap<span class="op">=</span><span class="st">"BuGn"</span>, ax<span class="op">=</span>fig.gca())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img src="2022-04-03-happywhale-pytorch-training-from-scratch-lite_files/figure-html/cell-6-output-1.png" class="img-fluid"></p>
+</div>
+</div>
+<p>And see the top individulas</p>
+<div class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2022-04-02T18:40:37.020026Z&quot;,&quot;iopub.status.busy&quot;:&quot;2022-04-02T18:40:37.019329Z&quot;,&quot;iopub.status.idle&quot;:&quot;2022-04-02T18:40:38.034952Z&quot;,&quot;shell.execute_reply&quot;:&quot;2022-04-02T18:40:38.035502Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2022-04-02T18:23:26.110593Z&quot;}" data-papermill="{&quot;duration&quot;:1.058467,&quot;end_time&quot;:&quot;2022-04-02T18:40:38.035720&quot;,&quot;exception&quot;:false,&quot;start_time&quot;:&quot;2022-04-02T18:40:36.977253&quot;,&quot;status&quot;:&quot;completed&quot;}" data-tags="[]" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> df_train[<span class="st">"individual_id"</span>].value_counts(ascending<span class="op">=</span><span class="va">True</span>)[<span class="op">-</span><span class="dv">50</span>:].plot.barh(figsize<span class="op">=</span>(<span class="dv">3</span>, <span class="dv">8</span>), grid<span class="op">=</span><span class="va">True</span>)  <span class="co"># ascending=True</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img src="2022-04-03-happywhale-pytorch-training-from-scratch-lite_files/figure-html/cell-7-output-1.png" class="img-fluid"></p>
+</div>
+</div>
+</section>
+<section id="browse-some-images" class="level2">
+<h2 class="anchored" data-anchor-id="browse-some-images">Browse some images</h2>
+<div class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2022-04-02T18:40:38.160254Z&quot;,&quot;iopub.status.busy&quot;:&quot;2022-04-02T18:40:38.159514Z&quot;,&quot;iopub.status.idle&quot;:&quot;2022-04-02T18:41:50.439748Z&quot;,&quot;shell.execute_reply&quot;:&quot;2022-04-02T18:41:50.440302Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2022-04-02T18:23:27.436564Z&quot;}" data-papermill="{&quot;duration&quot;:72.318005,&quot;end_time&quot;:&quot;2022-04-02T18:41:50.440458&quot;,&quot;exception&quot;:false,&quot;start_time&quot;:&quot;2022-04-02T18:40:38.122453&quot;,&quot;status&quot;:&quot;completed&quot;}" data-tags="[]" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>nb_species <span class="op">=</span> <span class="bu">len</span>(df_train[<span class="st">"species"</span>].unique())</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>fig, axarr <span class="op">=</span> plt.subplots(ncols<span class="op">=</span><span class="dv">5</span>, nrows<span class="op">=</span>nb_species, figsize<span class="op">=</span>(<span class="dv">12</span>, nb_species <span class="op">*</span> <span class="dv">2</span>))</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, (name, dfg) <span class="kw">in</span> <span class="bu">enumerate</span>(df_train.groupby(<span class="st">"species"</span>)):</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    axarr[i, <span class="dv">0</span>].set_title(name)</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> j, (_, row) <span class="kw">in</span> <span class="bu">enumerate</span>(dfg[:<span class="dv">5</span>].iterrows()):</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>        im_path <span class="op">=</span> os.path.join(PATH_DATASET, <span class="st">"train_images"</span>, row[<span class="st">"image"</span>])</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>        img <span class="op">=</span> plt.imread(im_path)</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>        axarr[i, j].imshow(img)</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>        axarr[i, j].set_axis_off()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img src="2022-04-03-happywhale-pytorch-training-from-scratch-lite_files/figure-html/cell-8-output-1.png" class="img-fluid"></p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># !pip install -q -U timm pytorch-lightning&gt;=1.6</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2022-04-02T18:42:02.090114Z&quot;,&quot;iopub.status.busy&quot;:&quot;2022-04-02T18:42:02.089276Z&quot;,&quot;iopub.status.idle&quot;:&quot;2022-04-02T18:42:05.003732Z&quot;,&quot;shell.execute_reply&quot;:&quot;2022-04-02T18:42:05.003227Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2022-04-02T18:25:04.314488Z&quot;}" data-papermill="{&quot;duration&quot;:3.11163,&quot;end_time&quot;:&quot;2022-04-02T18:42:05.003883&quot;,&quot;exception&quot;:false,&quot;start_time&quot;:&quot;2022-04-02T18:42:01.892253&quot;,&quot;status&quot;:&quot;completed&quot;}" data-tags="[]" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> torch</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> timm</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> PIL <span class="im">import</span> Image</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> torchvision <span class="im">import</span> transforms <span class="im">as</span> T</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> torch.utils.data <span class="im">import</span> Dataset, DataLoader, random_split</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> torchmetrics <span class="im">import</span> F1</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> torch.nn.functional <span class="im">as</span> F</span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> tqdm.auto <span class="im">import</span> tqdm</span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> torch</span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> torch.optim.lr_scheduler <span class="im">import</span> StepLR</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="create-dataloader" class="level1">
+<h1>Create DataLoader 🗄️</h1>
+<p><code>DataLoader</code> is an iterable object which contains your input image data and the target label. To create a DataLoader, we first need to implement a torch <code>Dataset</code> class. We define <code>MyDataset</code> class which inherits from <code>Dataset</code> and it will implement <code>__len__</code> and <code>__getitem__</code> method.</p>
+<div class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2022-04-02T18:42:05.466754Z&quot;,&quot;iopub.status.busy&quot;:&quot;2022-04-02T18:42:05.465964Z&quot;,&quot;iopub.status.idle&quot;:&quot;2022-04-02T18:42:05.470858Z&quot;,&quot;shell.execute_reply&quot;:&quot;2022-04-02T18:42:05.470406Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2022-04-02T18:25:05.158678Z&quot;}" data-papermill="{&quot;duration&quot;:0.130681,&quot;end_time&quot;:&quot;2022-04-02T18:42:05.470985&quot;,&quot;exception&quot;:false,&quot;start_time&quot;:&quot;2022-04-02T18:42:05.340304&quot;,&quot;status&quot;:&quot;completed&quot;}" data-tags="[]" data-execution_count="10">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>label_to_idx <span class="op">=</span> {e:i <span class="cf">for</span> i, e <span class="kw">in</span> <span class="bu">enumerate</span>(df_train.species.unique())}</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> MyDataset(Dataset):</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init__</span>(<span class="va">self</span>, df, transforms<span class="op">=</span><span class="va">None</span>):</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>        <span class="bu">super</span>().<span class="fu">__init__</span>()</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.df <span class="op">=</span> df</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.root <span class="op">=</span> os.path.join(PATH_DATASET, <span class="st">"train_images"</span>)</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>        <span class="va">self</span>.transforms <span class="op">=</span> transforms</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__len__</span>(<span class="va">self</span>): <span class="cf">return</span> <span class="bu">len</span>(<span class="va">self</span>.df)</span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__getitem__</span>(<span class="va">self</span>, idx):</span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>        data <span class="op">=</span> <span class="va">self</span>.df.iloc[idx]</span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>        image <span class="op">=</span> Image.<span class="bu">open</span>(<span class="va">self</span>.root <span class="op">+</span> <span class="ss">f"/</span><span class="sc">{</span>data<span class="sc">.</span>image<span class="sc">}</span><span class="ss">"</span>).convert(<span class="st">"RGB"</span>)</span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>        label <span class="op">=</span> label_to_idx[data.species]</span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="va">self</span>.transforms:</span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>            image <span class="op">=</span> <span class="va">self</span>.transforms(image)</span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> image, label</span>
+<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> random_split_dataset(data: Dataset, pct<span class="op">=</span><span class="fl">0.9</span>):</span>
+<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb12-24"><a href="#cb12-24" aria-hidden="true" tabindex="-1"></a><span class="co">    Randomly splits dataset into two sets. Length of first split is len(data) * pct.</span></span>
+<span id="cb12-25"><a href="#cb12-25" aria-hidden="true" tabindex="-1"></a><span class="co">    Source: https://github.com/gradsflow/gradsflow/blob/main/gradsflow/data/common.py#L20</span></span>
+<span id="cb12-26"><a href="#cb12-26" aria-hidden="true" tabindex="-1"></a><span class="co">    Args:</span></span>
+<span id="cb12-27"><a href="#cb12-27" aria-hidden="true" tabindex="-1"></a><span class="co">        data: pytorch Dataset object with `__len__` implementation.</span></span>
+<span id="cb12-28"><a href="#cb12-28" aria-hidden="true" tabindex="-1"></a><span class="co">        pct: percentage of split.</span></span>
+<span id="cb12-29"><a href="#cb12-29" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb12-30"><a href="#cb12-30" aria-hidden="true" tabindex="-1"></a>    n <span class="op">=</span> <span class="bu">len</span>(data)</span>
+<span id="cb12-31"><a href="#cb12-31" aria-hidden="true" tabindex="-1"></a>    split_1 <span class="op">=</span> <span class="bu">int</span>(n <span class="op">*</span> pct)</span>
+<span id="cb12-32"><a href="#cb12-32" aria-hidden="true" tabindex="-1"></a>    split_2 <span class="op">=</span> n <span class="op">-</span> split_1</span>
+<span id="cb12-33"><a href="#cb12-33" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> random_split(data, (split_1, split_2))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>We define image augmentation to make our classifier robust. We will use the function <code>random_split_dataset</code> to split dataset into train and validation set. Once we have our Dataset object, we can create a DataLoader class like this - <code>dataloader = DataLoader(dataset, batch_size=8)</code></p>
+<div class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2022-04-02T18:42:05.928255Z&quot;,&quot;iopub.status.busy&quot;:&quot;2022-04-02T18:42:05.927593Z&quot;,&quot;iopub.status.idle&quot;:&quot;2022-04-02T18:42:05.954048Z&quot;,&quot;shell.execute_reply&quot;:&quot;2022-04-02T18:42:05.953563Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2022-04-02T18:25:05.185830Z&quot;}" data-papermill="{&quot;duration&quot;:0.144505,&quot;end_time&quot;:&quot;2022-04-02T18:42:05.954175&quot;,&quot;exception&quot;:false,&quot;start_time&quot;:&quot;2022-04-02T18:42:05.809670&quot;,&quot;status&quot;:&quot;completed&quot;}" data-tags="[]" data-execution_count="11">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>transforms <span class="op">=</span> T.Compose([T.AutoAugment(),</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>                        T.Resize((<span class="dv">224</span>,<span class="dv">224</span>)), T.ToTensor()])</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>ds <span class="op">=</span> MyDataset(df_train, transforms)</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>split_pct <span class="op">=</span> <span class="fl">0.9</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>train_ds, val_ds <span class="op">=</span> random_split_dataset(ds, <span class="fl">0.9</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="write-training-loop" class="level1">
+<h1>Write Training Loop 🛠️</h1>
+<p>Now, we have our dataloader ready we can create our classifier and write training loop. A training loop consists of model prediction, loss computation, backward propagation and model weight update by the optimizer.</p>
+<p>We will start with a basic training loop then will use <code>LightningLite</code> to enable multiple hardware, precision and distributed training.</p>
+<p>First we will create model, optimizer, loss function and metrics.</p>
+<div class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2022-04-02T18:42:06.770414Z&quot;,&quot;iopub.status.busy&quot;:&quot;2022-04-02T18:42:06.766688Z&quot;,&quot;iopub.status.idle&quot;:&quot;2022-04-02T18:42:10.836330Z&quot;,&quot;shell.execute_reply&quot;:&quot;2022-04-02T18:42:10.835842Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2022-04-02T18:25:05.208015Z&quot;}" data-papermill="{&quot;duration&quot;:4.269065,&quot;end_time&quot;:&quot;2022-04-02T18:42:10.836458&quot;,&quot;exception&quot;:false,&quot;start_time&quot;:&quot;2022-04-02T18:42:06.567393&quot;,&quot;status&quot;:&quot;completed&quot;}" data-tags="[]" data-execution_count="12">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>batch_size <span class="op">=</span> <span class="dv">4</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>device <span class="op">=</span> <span class="st">"cuda"</span> <span class="cf">if</span> torch.cuda.is_available() <span class="cf">else</span> <span class="st">"cpu"</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>dry_run <span class="op">=</span> <span class="va">True</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>num_epochs <span class="op">=</span> <span class="dv">5</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> timm.create_model(<span class="st">"efficientnet_b0"</span>, pretrained<span class="op">=</span><span class="va">True</span>, num_classes<span class="op">=</span><span class="bu">len</span>(label_to_idx))</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> model.to(device)</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>optimizer <span class="op">=</span> torch.optim.AdamW(model.parameters(), <span class="fl">1e-4</span>)</span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>criterion <span class="op">=</span> torch.nn.CrossEntropyLoss()</span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>metric <span class="op">=</span> F1().to(device)</span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>train_loader <span class="op">=</span> DataLoader(train_ds, batch_size<span class="op">=</span>batch_size)</span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>val_loader <span class="op">=</span> DataLoader(val_ds, batch_size<span class="op">=</span>batch_size)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Downloading: "https://github.com/rwightman/pytorch-image-models/releases/download/v0.1-weights/efficientnet_b0_ra-3dd342df.pth" to /root/.cache/torch/hub/checkpoints/efficientnet_b0_ra-3dd342df.pth</code></pre>
+</div>
+</div>
+<section id="training-loop" class="level2">
+<h2 class="anchored" data-anchor-id="training-loop">Training Loop</h2>
+<p>For writing the training loop we will iterate a <code>for loop</code> for given number of epochs <code>num_epochs</code>. Set the model to training mode with <code>model.train()</code> and iterate through the dataloader. We pass the data to model and calculate the crossentropy loss. We do <code>loss.backward()</code> to compute gradients followed by <code>optimizer.step()</code> which will update the model weights.</p>
+<p>For model evaluation we define a validation loop which will calculate the <code>F1 accuracy</code> on the validation dataset. For validation we set our model to eval mode with <code>model.eval()</code> method. For calculating F1 accuracy, we use <a href="https://torchmetrics.readthedocs.io/">TorchMetrics</a> which contains a collection of Machine Learning metrics for distributed, scalable PyTorch models and an easy-to-use API to create custom metrics.</p>
+<div class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2022-04-02T18:42:11.345019Z&quot;,&quot;iopub.status.busy&quot;:&quot;2022-04-02T18:42:11.344085Z&quot;,&quot;iopub.status.idle&quot;:&quot;2022-04-02T18:42:18.687141Z&quot;,&quot;shell.execute_reply&quot;:&quot;2022-04-02T18:42:18.687612Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2022-04-02T18:25:07.777917Z&quot;}" data-papermill="{&quot;duration&quot;:7.490216,&quot;end_time&quot;:&quot;2022-04-02T18:42:18.687849&quot;,&quot;exception&quot;:false,&quot;start_time&quot;:&quot;2022-04-02T18:42:11.197633&quot;,&quot;status&quot;:&quot;completed&quot;}" data-tags="[]" data-execution_count="13">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># EPOCH LOOP</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> epoch <span class="kw">in</span> tqdm(<span class="bu">range</span>(<span class="dv">1</span>, num_epochs <span class="op">+</span> <span class="dv">1</span>)):</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># TRAINING LOOP</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>    model.train()</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> batch_idx, (data, target) <span class="kw">in</span> tqdm(<span class="bu">enumerate</span>(train_loader), total<span class="op">=</span><span class="bu">len</span>(train_ds)<span class="op">//</span>batch_size):</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>        data, target<span class="op">=</span> data.to(device), target.to(device)</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>        optimizer.zero_grad()</span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>        output <span class="op">=</span> model(data)</span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>        loss <span class="op">=</span> criterion(output, target)</span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>        loss.backward()</span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>        optimizer.step()</span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> (batch_idx <span class="op">==</span> <span class="dv">0</span>) <span class="kw">or</span> ((batch_idx <span class="op">+</span> <span class="dv">1</span>) <span class="op">%</span> log_interval <span class="op">==</span> <span class="dv">0</span>):</span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(</span>
+<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a>                <span class="st">"Train Epoch: </span><span class="sc">{}</span><span class="st"> [</span><span class="sc">{}</span><span class="st">/</span><span class="sc">{}</span><span class="st"> (</span><span class="sc">{:.0f}</span><span class="st">%)]</span><span class="ch">\t</span><span class="st">Loss: </span><span class="sc">{:.6f}</span><span class="st">"</span>.<span class="bu">format</span>(</span>
+<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a>                    epoch,</span>
+<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a>                    batch_idx <span class="op">*</span> <span class="bu">len</span>(data),</span>
+<span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a>                    <span class="bu">len</span>(train_loader.dataset),</span>
+<span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a>                    <span class="fl">100.0</span> <span class="op">*</span> batch_idx <span class="op">/</span> <span class="bu">len</span>(train_loader),</span>
+<span id="cb16-22"><a href="#cb16-22" aria-hidden="true" tabindex="-1"></a>                    loss.item(),</span>
+<span id="cb16-23"><a href="#cb16-23" aria-hidden="true" tabindex="-1"></a>                )</span>
+<span id="cb16-24"><a href="#cb16-24" aria-hidden="true" tabindex="-1"></a>            )</span>
+<span id="cb16-25"><a href="#cb16-25" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> dry_run:</span>
+<span id="cb16-26"><a href="#cb16-26" aria-hidden="true" tabindex="-1"></a>                <span class="cf">break</span></span>
+<span id="cb16-27"><a href="#cb16-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-28"><a href="#cb16-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-29"><a href="#cb16-29" aria-hidden="true" tabindex="-1"></a>    <span class="co"># </span><span class="al">TESTING</span><span class="co"> LOOP</span></span>
+<span id="cb16-30"><a href="#cb16-30" aria-hidden="true" tabindex="-1"></a>    model.<span class="bu">eval</span>()</span>
+<span id="cb16-31"><a href="#cb16-31" aria-hidden="true" tabindex="-1"></a>    test_loss <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb16-32"><a href="#cb16-32" aria-hidden="true" tabindex="-1"></a>    <span class="cf">with</span> torch.no_grad():</span>
+<span id="cb16-33"><a href="#cb16-33" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> data, target <span class="kw">in</span> val_loader:</span>
+<span id="cb16-34"><a href="#cb16-34" aria-hidden="true" tabindex="-1"></a>            data <span class="op">=</span> data.to(device)</span>
+<span id="cb16-35"><a href="#cb16-35" aria-hidden="true" tabindex="-1"></a>            target <span class="op">=</span> target.to(device)</span>
+<span id="cb16-36"><a href="#cb16-36" aria-hidden="true" tabindex="-1"></a>            output <span class="op">=</span> model(data)</span>
+<span id="cb16-37"><a href="#cb16-37" aria-hidden="true" tabindex="-1"></a>            test_loss <span class="op">+=</span> criterion(output, target).item()</span>
+<span id="cb16-38"><a href="#cb16-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-39"><a href="#cb16-39" aria-hidden="true" tabindex="-1"></a>            <span class="co"># WITH TorchMetrics</span></span>
+<span id="cb16-40"><a href="#cb16-40" aria-hidden="true" tabindex="-1"></a>            metric(output, target)</span>
+<span id="cb16-41"><a href="#cb16-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-42"><a href="#cb16-42" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> dry_run:</span>
+<span id="cb16-43"><a href="#cb16-43" aria-hidden="true" tabindex="-1"></a>                <span class="cf">break</span></span>
+<span id="cb16-44"><a href="#cb16-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-45"><a href="#cb16-45" aria-hidden="true" tabindex="-1"></a>    <span class="co"># all_gather is used to aggregated the value across processes</span></span>
+<span id="cb16-46"><a href="#cb16-46" aria-hidden="true" tabindex="-1"></a>    test_loss <span class="op">=</span> test_loss <span class="op">/</span> <span class="bu">len</span>(val_loader.dataset)</span>
+<span id="cb16-47"><a href="#cb16-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-48"><a href="#cb16-48" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"</span><span class="ch">\n</span><span class="ss">Test set: Average loss: </span><span class="sc">{</span>test_loss<span class="sc">:.4f}</span><span class="ss">, Accuracy: (</span><span class="sc">{</span>metric<span class="sc">.</span>compute()<span class="sc">:.0f}</span><span class="ss">%)</span><span class="ch">\n</span><span class="ss">"</span>)</span>
+<span id="cb16-49"><a href="#cb16-49" aria-hidden="true" tabindex="-1"></a>    metric.reset()</span>
+<span id="cb16-50"><a href="#cb16-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-51"><a href="#cb16-51" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> dry_run:</span>
+<span id="cb16-52"><a href="#cb16-52" aria-hidden="true" tabindex="-1"></a>        <span class="cf">break</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<script type="application/vnd.jupyter.widget-view+json">
+{"model_id":"a0db14142db94df58621932a81352c4e","version_major":2,"version_minor":0}
+</script>
+</div>
+<div class="cell-output cell-output-display">
+<script type="application/vnd.jupyter.widget-view+json">
+{"model_id":"8e44b1528b38475d9eb09de6b6882f27","version_major":2,"version_minor":0}
+</script>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Train Epoch: 1 [0/45929 (0%)]   Loss: 3.646841
+
+Test set: Average loss: 0.0008, Accuracy: (0%)
+</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="scale-model-training" class="level1">
+<h1>👷 Scale Model Training</h1>
+<p>Our dry run was successful 🎉! Now, let’s scale our training on a hardware accelerator like GPU or TPU. We can also use distributed training if multiple devices are available. For this purpose we use <code>LightningLite</code>, it scales PyTorch model training loop with minimal changes. That means we will retain the full control of our training loop! It also enables Precision support abd DDP training.</p>
+<p>To use LightningLite, we will import it from PyTorch Lightning library. We implement LightningLite and override <code>run</code> method. We can just copy paste our whole training loop code inside the <code>run</code> method and then just make these three changes to our code.</p>
+<ol type="1">
+<li><code>model, optimizer = self.setup(model, optimizer)</code></li>
+<li><code>dataloader = self.setup_dataloaders(dataloader)</code></li>
+<li>Replace <code>loss.backward()</code> with <code>self.backward(loss)</code></li>
+</ol>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://pl-public-data.s3.amazonaws.com/docs/static/images/lite/lightning_lite.gif" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">GIF</figcaption><p></p>
+</figure>
+</div>
+<div class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2022-04-02T18:42:19.211513Z&quot;,&quot;iopub.status.busy&quot;:&quot;2022-04-02T18:42:19.210419Z&quot;,&quot;iopub.status.idle&quot;:&quot;2022-04-02T18:42:19.215965Z&quot;,&quot;shell.execute_reply&quot;:&quot;2022-04-02T18:42:19.216463Z&quot;,&quot;shell.execute_reply.started&quot;:&quot;2022-04-02T18:25:10.772213Z&quot;}" data-papermill="{&quot;duration&quot;:0.151187,&quot;end_time&quot;:&quot;2022-04-02T18:42:19.216626&quot;,&quot;exception&quot;:false,&quot;start_time&quot;:&quot;2022-04-02T18:42:19.065439&quot;,&quot;status&quot;:&quot;completed&quot;}" data-tags="[]" data-execution_count="14">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pytorch_lightning.lite <span class="im">import</span> LightningLite</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> CustomTrainer(LightningLite):</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> run(<span class="va">self</span>, num_epochs, batch_size, gamma<span class="op">=</span><span class="fl">0.7</span>, dry_run: <span class="bu">bool</span><span class="op">=</span><span class="va">False</span>, save_model<span class="op">=</span><span class="va">True</span>, log_interval<span class="op">=</span><span class="dv">10</span>):</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>        model <span class="op">=</span> timm.create_model(<span class="st">"efficientnet_b0"</span>, pretrained<span class="op">=</span><span class="va">True</span>, num_classes<span class="op">=</span><span class="bu">len</span>(label_to_idx))</span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>        optimizer <span class="op">=</span> torch.optim.AdamW(model.parameters(), <span class="fl">1e-4</span>)</span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>        criterion <span class="op">=</span> torch.nn.CrossEntropyLoss()</span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>        metric <span class="op">=</span> F1().to(<span class="va">self</span>.device)</span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="va">self</span>.device)</span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a>        <span class="co"># don't forget to call `setup` to prepare for model / optimizer for distributed training.</span></span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a>        <span class="co"># the model is moved automatically to the right device.</span></span>
+<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a>        model, optimizer <span class="op">=</span> <span class="va">self</span>.setup(model, optimizer)</span>
+<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a>        pin_memory <span class="op">=</span> <span class="st">"cuda"</span> <span class="kw">in</span> <span class="va">self</span>.device.<span class="bu">type</span></span>
+<span id="cb18-18"><a href="#cb18-18" aria-hidden="true" tabindex="-1"></a>        train_loader, val_loader <span class="op">=</span> <span class="va">self</span>.setup_dataloaders(DataLoader(train_ds, batch_size<span class="op">=</span>batch_size, pin_memory<span class="op">=</span>pin_memory),</span>
+<span id="cb18-19"><a href="#cb18-19" aria-hidden="true" tabindex="-1"></a>                                            DataLoader(val_ds, batch_size<span class="op">=</span>batch_size, pin_memory<span class="op">=</span>pin_memory))</span>
+<span id="cb18-20"><a href="#cb18-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-21"><a href="#cb18-21" aria-hidden="true" tabindex="-1"></a>        scheduler <span class="op">=</span> StepLR(optimizer, step_size<span class="op">=</span><span class="dv">1</span>, gamma<span class="op">=</span>gamma)</span>
+<span id="cb18-22"><a href="#cb18-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-23"><a href="#cb18-23" aria-hidden="true" tabindex="-1"></a>        <span class="co"># EPOCH LOOP</span></span>
+<span id="cb18-24"><a href="#cb18-24" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> epoch <span class="kw">in</span> tqdm(<span class="bu">range</span>(<span class="dv">1</span>, num_epochs <span class="op">+</span> <span class="dv">1</span>)):</span>
+<span id="cb18-25"><a href="#cb18-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-26"><a href="#cb18-26" aria-hidden="true" tabindex="-1"></a>            <span class="co"># TRAINING LOOP</span></span>
+<span id="cb18-27"><a href="#cb18-27" aria-hidden="true" tabindex="-1"></a>            model.train()</span>
+<span id="cb18-28"><a href="#cb18-28" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> batch_idx, (data, target) <span class="kw">in</span> tqdm(<span class="bu">enumerate</span>(train_loader), total<span class="op">=</span><span class="bu">len</span>(train_ds)<span class="op">//</span>batch_size):</span>
+<span id="cb18-29"><a href="#cb18-29" aria-hidden="true" tabindex="-1"></a>                <span class="co"># </span><span class="al">NOTE</span><span class="co">: no need to call `.to(device)` on the data, target</span></span>
+<span id="cb18-30"><a href="#cb18-30" aria-hidden="true" tabindex="-1"></a>                optimizer.zero_grad()</span>
+<span id="cb18-31"><a href="#cb18-31" aria-hidden="true" tabindex="-1"></a>                output <span class="op">=</span> model(data)</span>
+<span id="cb18-32"><a href="#cb18-32" aria-hidden="true" tabindex="-1"></a>                loss <span class="op">=</span> criterion(output, target)</span>
+<span id="cb18-33"><a href="#cb18-33" aria-hidden="true" tabindex="-1"></a>                <span class="va">self</span>.backward(loss)  <span class="co"># instead of loss.backward()</span></span>
+<span id="cb18-34"><a href="#cb18-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-35"><a href="#cb18-35" aria-hidden="true" tabindex="-1"></a>                optimizer.step()</span>
+<span id="cb18-36"><a href="#cb18-36" aria-hidden="true" tabindex="-1"></a>                <span class="cf">if</span> (batch_idx <span class="op">==</span> <span class="dv">0</span>) <span class="kw">or</span> ((batch_idx <span class="op">+</span> <span class="dv">1</span>) <span class="op">%</span> log_interval <span class="op">==</span> <span class="dv">0</span>):</span>
+<span id="cb18-37"><a href="#cb18-37" aria-hidden="true" tabindex="-1"></a>                    <span class="bu">print</span>(</span>
+<span id="cb18-38"><a href="#cb18-38" aria-hidden="true" tabindex="-1"></a>                        <span class="st">"Train Epoch: </span><span class="sc">{}</span><span class="st"> [</span><span class="sc">{}</span><span class="st">/</span><span class="sc">{}</span><span class="st"> (</span><span class="sc">{:.0f}</span><span class="st">%)]</span><span class="ch">\t</span><span class="st">Loss: </span><span class="sc">{:.6f}</span><span class="st">"</span>.<span class="bu">format</span>(</span>
+<span id="cb18-39"><a href="#cb18-39" aria-hidden="true" tabindex="-1"></a>                            epoch,</span>
+<span id="cb18-40"><a href="#cb18-40" aria-hidden="true" tabindex="-1"></a>                            batch_idx <span class="op">*</span> <span class="bu">len</span>(data),</span>
+<span id="cb18-41"><a href="#cb18-41" aria-hidden="true" tabindex="-1"></a>                            <span class="bu">len</span>(train_loader.dataset),</span>
+<span id="cb18-42"><a href="#cb18-42" aria-hidden="true" tabindex="-1"></a>                            <span class="fl">100.0</span> <span class="op">*</span> batch_idx <span class="op">/</span> <span class="bu">len</span>(train_loader),</span>
+<span id="cb18-43"><a href="#cb18-43" aria-hidden="true" tabindex="-1"></a>                            loss.item(),</span>
+<span id="cb18-44"><a href="#cb18-44" aria-hidden="true" tabindex="-1"></a>                        )</span>
+<span id="cb18-45"><a href="#cb18-45" aria-hidden="true" tabindex="-1"></a>                    )</span>
+<span id="cb18-46"><a href="#cb18-46" aria-hidden="true" tabindex="-1"></a>                    <span class="cf">if</span> dry_run:</span>
+<span id="cb18-47"><a href="#cb18-47" aria-hidden="true" tabindex="-1"></a>                        <span class="cf">break</span></span>
+<span id="cb18-48"><a href="#cb18-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-49"><a href="#cb18-49" aria-hidden="true" tabindex="-1"></a>            scheduler.step()</span>
+<span id="cb18-50"><a href="#cb18-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-51"><a href="#cb18-51" aria-hidden="true" tabindex="-1"></a>            <span class="co"># </span><span class="al">TESTING</span><span class="co"> LOOP</span></span>
+<span id="cb18-52"><a href="#cb18-52" aria-hidden="true" tabindex="-1"></a>            model.<span class="bu">eval</span>()</span>
+<span id="cb18-53"><a href="#cb18-53" aria-hidden="true" tabindex="-1"></a>            test_loss <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb18-54"><a href="#cb18-54" aria-hidden="true" tabindex="-1"></a>            <span class="cf">with</span> torch.no_grad():</span>
+<span id="cb18-55"><a href="#cb18-55" aria-hidden="true" tabindex="-1"></a>                <span class="cf">for</span> data, target <span class="kw">in</span> val_loader:</span>
+<span id="cb18-56"><a href="#cb18-56" aria-hidden="true" tabindex="-1"></a>                    <span class="co"># </span><span class="al">NOTE</span><span class="co">: no need to call `.to(device)` on the data, target</span></span>
+<span id="cb18-57"><a href="#cb18-57" aria-hidden="true" tabindex="-1"></a>                    output <span class="op">=</span> model(data)</span>
+<span id="cb18-58"><a href="#cb18-58" aria-hidden="true" tabindex="-1"></a>                    test_loss <span class="op">+=</span> criterion(output, target).item()</span>
+<span id="cb18-59"><a href="#cb18-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-60"><a href="#cb18-60" aria-hidden="true" tabindex="-1"></a>                    <span class="co"># WITH TorchMetrics</span></span>
+<span id="cb18-61"><a href="#cb18-61" aria-hidden="true" tabindex="-1"></a>                    metric(output, target)</span>
+<span id="cb18-62"><a href="#cb18-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-63"><a href="#cb18-63" aria-hidden="true" tabindex="-1"></a>                    <span class="cf">if</span> dry_run:</span>
+<span id="cb18-64"><a href="#cb18-64" aria-hidden="true" tabindex="-1"></a>                        <span class="cf">break</span></span>
+<span id="cb18-65"><a href="#cb18-65" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-66"><a href="#cb18-66" aria-hidden="true" tabindex="-1"></a>            <span class="co"># all_gather is used to aggregated the value across processes</span></span>
+<span id="cb18-67"><a href="#cb18-67" aria-hidden="true" tabindex="-1"></a>            test_loss <span class="op">=</span> <span class="va">self</span>.all_gather(test_loss).<span class="bu">sum</span>() <span class="op">/</span> <span class="bu">len</span>(val_loader.dataset)</span>
+<span id="cb18-68"><a href="#cb18-68" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-69"><a href="#cb18-69" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(<span class="ss">f"</span><span class="ch">\n</span><span class="ss">Test set: Average loss: </span><span class="sc">{</span>test_loss<span class="sc">:.4f}</span><span class="ss">, Accuracy: (</span><span class="sc">{</span>metric<span class="sc">.</span>compute()<span class="sc">:.0f}</span><span class="ss">%)</span><span class="ch">\n</span><span class="ss">"</span>)</span>
+<span id="cb18-70"><a href="#cb18-70" aria-hidden="true" tabindex="-1"></a>            metric.reset()</span>
+<span id="cb18-71"><a href="#cb18-71" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-72"><a href="#cb18-72" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> dry_run:</span>
+<span id="cb18-73"><a href="#cb18-73" aria-hidden="true" tabindex="-1"></a>                <span class="cf">break</span></span>
+<span id="cb18-74"><a href="#cb18-74" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-75"><a href="#cb18-75" aria-hidden="true" tabindex="-1"></a>        <span class="co"># When using distributed training, use `self.save`</span></span>
+<span id="cb18-76"><a href="#cb18-76" aria-hidden="true" tabindex="-1"></a>        <span class="co"># to ensure the current process is allowed to save a checkpoint</span></span>
+<span id="cb18-77"><a href="#cb18-77" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> save_model:</span>
+<span id="cb18-78"><a href="#cb18-78" aria-hidden="true" tabindex="-1"></a>            <span class="va">self</span>.save(model.state_dict(), <span class="st">"model.pt"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>That’s all we need to do. Now we can select any supported hardware, precision type, number of devices, or <a href="https://pytorch-lightning.readthedocs.io/en/latest/starter/lightning_lite.html#strategy">training strategy</a>.</p>
+<p>Run this cell to train the model on one GPU.</p>
+<div class="cell" data-execution="{&quot;iopub.execute_input&quot;:&quot;2022-04-02T18:42:19.715984Z&quot;,&quot;iopub.status.busy&quot;:&quot;2022-04-02T18:42:19.714998Z&quot;,&quot;iopub.status.idle&quot;:&quot;2022-04-02T20:45:23.968065Z&quot;,&quot;shell.execute_reply&quot;:&quot;2022-04-02T20:45:23.965545Z&quot;}" data-papermill="{&quot;duration&quot;:7384.380003,&quot;end_time&quot;:&quot;2022-04-02T20:45:23.968203&quot;,&quot;exception&quot;:false,&quot;start_time&quot;:&quot;2022-04-02T18:42:19.588200&quot;,&quot;status&quot;:&quot;completed&quot;}" data-tags="[]" data-execution_count="15">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>trainer <span class="op">=</span> CustomTrainer(accelerator <span class="op">=</span> <span class="st">"gpu"</span>, gpus<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>trainer.run(num_epochs<span class="op">=</span><span class="dv">1</span>, batch_size<span class="op">=</span><span class="dv">128</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>cuda:0</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<script type="application/vnd.jupyter.widget-view+json">
+{"model_id":"c8887015d9584330b0a89a9840e87e2a","version_major":2,"version_minor":0}
+</script>
+</div>
+<div class="cell-output cell-output-display">
+<script type="application/vnd.jupyter.widget-view+json">
+{"model_id":"def5de72c60344d891e4eacadb07ded6","version_major":2,"version_minor":0}
+</script>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Train Epoch: 1 [0/45929 (0%)]   Loss: 4.033646
+Train Epoch: 1 [1152/45929 (3%)]    Loss: 2.897996
+Train Epoch: 1 [2432/45929 (5%)]    Loss: 2.228965
+Train Epoch: 1 [3712/45929 (8%)]    Loss: 1.733439
+Train Epoch: 1 [4992/45929 (11%)]   Loss: 1.733582
+Train Epoch: 1 [6272/45929 (14%)]   Loss: 1.438736
+Train Epoch: 1 [7552/45929 (16%)]   Loss: 1.324237
+Train Epoch: 1 [8832/45929 (19%)]   Loss: 1.311875
+Train Epoch: 1 [10112/45929 (22%)]  Loss: 1.153679
+Train Epoch: 1 [11392/45929 (25%)]  Loss: 1.068135
+Train Epoch: 1 [12672/45929 (28%)]  Loss: 0.795189
+Train Epoch: 1 [13952/45929 (30%)]  Loss: 0.806610
+Train Epoch: 1 [15232/45929 (33%)]  Loss: 0.847775
+Train Epoch: 1 [16512/45929 (36%)]  Loss: 0.828618
+Train Epoch: 1 [17792/45929 (39%)]  Loss: 0.805902
+Train Epoch: 1 [19072/45929 (42%)]  Loss: 0.794924
+Train Epoch: 1 [20352/45929 (44%)]  Loss: 0.730848
+Train Epoch: 1 [21632/45929 (47%)]  Loss: 0.791776
+Train Epoch: 1 [22912/45929 (50%)]  Loss: 0.567644
+Train Epoch: 1 [24192/45929 (53%)]  Loss: 0.712434
+Train Epoch: 1 [25472/45929 (55%)]  Loss: 0.621673
+Train Epoch: 1 [26752/45929 (58%)]  Loss: 0.657078
+Train Epoch: 1 [28032/45929 (61%)]  Loss: 0.829939
+Train Epoch: 1 [29312/45929 (64%)]  Loss: 0.632966
+Train Epoch: 1 [30592/45929 (67%)]  Loss: 0.603066
+Train Epoch: 1 [31872/45929 (69%)]  Loss: 0.510153
+Train Epoch: 1 [33152/45929 (72%)]  Loss: 0.507989
+Train Epoch: 1 [34432/45929 (75%)]  Loss: 0.515971
+Train Epoch: 1 [35712/45929 (78%)]  Loss: 0.410823
+Train Epoch: 1 [36992/45929 (81%)]  Loss: 0.316385
+Train Epoch: 1 [38272/45929 (83%)]  Loss: 0.455764
+Train Epoch: 1 [39552/45929 (86%)]  Loss: 0.532778
+Train Epoch: 1 [40832/45929 (89%)]  Loss: 0.457156
+Train Epoch: 1 [42112/45929 (92%)]  Loss: 0.447986
+Train Epoch: 1 [43392/45929 (94%)]  Loss: 0.355336
+Train Epoch: 1 [44672/45929 (97%)]  Loss: 0.368111
+
+Test set: Average loss: 0.0030, Accuracy: (1%)
+</code></pre>
+</div>
+</div>
+<section id="happy-training" class="level2">
+<h2 class="anchored" data-anchor-id="happy-training">Happy Training! ⚡️🎉</h2>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script type="application/vnd.jupyter.widget-state+json">
+{"state":{"00f4bffdfa45409381bf813ba421eb01":{"model_module":"@jupyter-widgets/controls","model_module_version":"1.5.0","model_name":"DescriptionStyleModel","state":{"_model_module":"@jupyter-widgets/controls","_model_module_version":"1.5.0","_model_name":"DescriptionStyleModel","_view_count":null,"_view_module":"@jupyter-widgets/base","_view_module_version":"1.2.0","_view_name":"StyleView","description_width":""}},"01f38194e166489dadd88e614313f498":{"model_module":"@jupyter-widgets/base","model_module_version":"1.2.0","model_name":"LayoutModel","state":{"_model_module":"@jupyter-widgets/base","_model_module_version":"1.2.0","_model_name":"LayoutModel","_view_count":null,"_view_module":"@jupyter-widgets/base","_view_module_version":"1.2.0","_view_name":"LayoutView","align_content":null,"align_items":null,"align_self":null,"border":null,"bottom":null,"display":null,"flex":null,"flex_flow":null,"grid_area":null,"grid_auto_columns":null,"grid_auto_flow":null,"grid_auto_rows":null,"grid_column":null,"grid_gap":null,"grid_row":null,"grid_template_areas":null,"grid_template_columns":null,"grid_template_rows":null,"height":null,"justify_content":null,"justify_items":null,"left":null,"margin":null,"max_height":null,"max_width":null,"min_height":null,"min_width":null,"object_fit":null,"object_position":null,"order":null,"overflow":null,"overflow_x":null,"overflow_y":null,"padding":null,"right":null,"top":null,"visibility":null,"width":null}},"0720eb411806438eadf6250d10d6b43a":{"model_module":"@jupyter-widgets/base","model_module_version":"1.2.0","model_name":"LayoutModel","state":{"_model_module":"@jupyter-widgets/base","_model_module_version":"1.2.0","_model_name":"LayoutModel","_view_count":null,"_view_module":"@jupyter-widgets/base","_view_module_version":"1.2.0","_view_name":"LayoutView","align_content":null,"align_items":null,"align_self":null,"border":null,"bottom":null,"display":null,"flex":null,"flex_flow":null,"grid_area":null,"grid_auto_columns":null,"grid_auto_flow":null,"grid_auto_rows":null,"grid_column":null,"grid_gap":null,"grid_row":null,"grid_template_areas":null,"grid_template_columns":null,"grid_template_rows":null,"height":null,"justify_content":null,"justify_items":null,"left":null,"margin":null,"max_height":null,"max_width":null,"min_height":null,"min_width":null,"object_fit":null,"object_position":null,"order":null,"overflow":null,"overflow_x":null,"overflow_y":null,"padding":null,"right":null,"top":null,"visibility":null,"width":null}},"103dd796c05e4872b39445765c81f4fd":{"model_module":"@jupyter-widgets/controls","model_module_version":"1.5.0","model_name":"FloatProgressModel","state":{"_dom_classes":[],"_model_module":"@jupyter-widgets/controls","_model_module_version":"1.5.0","_model_name":"FloatProgressModel","_view_count":null,"_view_module":"@jupyter-widgets/controls","_view_module_version":"1.5.0","_view_name":"ProgressView","bar_style":"success","description":"","description_tooltip":null,"layout":"IPY_MODEL_a64e54f380f24786ae0fe0bcad6a1715","max":1,"min":0,"orientation":"horizontal","style":"IPY_MODEL_a6af67121bee4d7d83a2c770a4f3877c","value":1}},"18660aa114fc475bacc16294a75f8437":{"model_module":"@jupyter-widgets/controls","model_module_version":"1.5.0","model_name":"DescriptionStyleModel","state":{"_model_module":"@jupyter-widgets/controls","_model_module_version":"1.5.0","_model_name":"DescriptionStyleModel","_view_count":null,"_view_module":"@jupyter-widgets/base","_view_module_version":"1.2.0","_view_name":"StyleView","description_width":""}},"194f09f03cf544ca9afa1c21d90a2d5a":{"model_module":"@jupyter-widgets/controls","model_module_version":"1.5.0","model_name":"ProgressStyleModel","state":{"_model_module":"@jupyter-widgets/controls","_model_module_version":"1.5.0","_model_name":"ProgressStyleModel","_view_count":null,"_view_module":"@jupyter-widgets/base","_view_module_version":"1.2.0","_view_name":"StyleView","bar_color":null,"description_width":""}},"1b9863d1c50543bea4802d07150cc249":{"model_module":"@jupyter-widgets/controls","model_module_version":"1.5.0","model_name":"ProgressStyleModel","state":{"_model_module":"@jupyter-widgets/controls","_model_module_version":"1.5.0","_model_name":"ProgressStyleModel","_view_count":null,"_view_module":"@jupyter-widgets/base","_view_module_version":"1.2.0","_view_name":"StyleView","bar_color":null,"description_width":""}},"26f816ab651247cabd80e2695be9e6f0":{"model_module":"@jupyter-widgets/controls","model_module_version":"1.5.0","model_name":"HTMLModel","state":{"_dom_classes":[],"_model_module":"@jupyter-widgets/controls","_model_module_version":"1.5.0","_model_name":"HTMLModel","_view_count":null,"_view_module":"@jupyter-widgets/controls","_view_module_version":"1.5.0","_view_name":"HTMLView","description":"","description_tooltip":null,"layout":"IPY_MODEL_b03b7df490b845b69ba0deeceae74700","placeholder":"​","style":"IPY_MODEL_4bcd76beaba14a6fa7b705ab81f967a9","value":"  0%"}},"2e7f447183ee4d5eb5ff1f5ab429ee14":{"model_module":"@jupyter-widgets/base","model_module_version":"1.2.0","model_name":"LayoutModel","state":{"_model_module":"@jupyter-widgets/base","_model_module_version":"1.2.0","_model_name":"LayoutModel","_view_count":null,"_view_module":"@jupyter-widgets/base","_view_module_version":"1.2.0","_view_name":"LayoutView","align_content":null,"align_items":null,"align_self":null,"border":null,"bottom":null,"display":null,"flex":null,"flex_flow":null,"grid_area":null,"grid_auto_columns":null,"grid_auto_flow":null,"grid_auto_rows":null,"grid_column":null,"grid_gap":null,"grid_row":null,"grid_template_areas":null,"grid_template_columns":null,"grid_template_rows":null,"height":null,"justify_content":null,"justify_items":null,"left":null,"margin":null,"max_height":null,"max_width":null,"min_height":null,"min_width":null,"object_fit":null,"object_position":null,"order":null,"overflow":null,"overflow_x":null,"overflow_y":null,"padding":null,"right":null,"top":null,"visibility":null,"width":null}},"3663be9dbaa145bf8895665920dab02b":{"model_module":"@jupyter-widgets/base","model_module_version":"1.2.0","model_name":"LayoutModel","state":{"_model_module":"@jupyter-widgets/base","_model_module_version":"1.2.0","_model_name":"LayoutModel","_view_count":null,"_view_module":"@jupyter-widgets/base","_view_module_version":"1.2.0","_view_name":"LayoutView","align_content":null,"align_items":null,"align_self":null,"border":null,"bottom":null,"display":null,"flex":null,"flex_flow":null,"grid_area":null,"grid_auto_columns":null,"grid_auto_flow":null,"grid_auto_rows":null,"grid_column":null,"grid_gap":null,"grid_row":null,"grid_template_areas":null,"grid_template_columns":null,"grid_template_rows":null,"height":null,"justify_content":null,"justify_items":null,"left":null,"margin":null,"max_height":null,"max_width":null,"min_height":null,"min_width":null,"object_fit":null,"object_position":null,"order":null,"overflow":null,"overflow_x":null,"overflow_y":null,"padding":null,"right":null,"top":null,"visibility":null,"width":null}},"440ea6884c414e45a0e1711298359144":{"model_module":"@jupyter-widgets/controls","model_module_version":"1.5.0","model_name":"FloatProgressModel","state":{"_dom_classes":[],"_model_module":"@jupyter-widgets/controls","_model_module_version":"1.5.0","_model_name":"FloatProgressModel","_view_count":null,"_view_module":"@jupyter-widgets/controls","_view_module_version":"1.5.0","_view_name":"ProgressView","bar_style":"danger","description":"","description_tooltip":null,"layout":"IPY_MODEL_dbc13d97c84046bebef137c3935cb4e8","max":11482,"min":0,"orientation":"horizontal","style":"IPY_MODEL_76afdbda3c374234b90afd420a7e5148","value":0}},"4bcd76beaba14a6fa7b705ab81f967a9":{"model_module":"@jupyter-widgets/controls","model_module_version":"1.5.0","model_name":"DescriptionStyleModel","state":{"_model_module":"@jupyter-widgets/controls","_model_module_version":"1.5.0","_model_name":"DescriptionStyleModel","_view_count":null,"_view_module":"@jupyter-widgets/base","_view_module_version":"1.2.0","_view_name":"StyleView","description_width":""}},"5527ed6d03534e189a67bad5808dfd18":{"model_module":"@jupyter-widgets/base","model_module_version":"1.2.0","model_name":"LayoutModel","state":{"_model_module":"@jupyter-widgets/base","_model_module_version":"1.2.0","_model_name":"LayoutModel","_view_count":null,"_view_module":"@jupyter-widgets/base","_view_module_version":"1.2.0","_view_name":"LayoutView","align_content":null,"align_items":null,"align_self":null,"border":null,"bottom":null,"display":null,"flex":null,"flex_flow":null,"grid_area":null,"grid_auto_columns":null,"grid_auto_flow":null,"grid_auto_rows":null,"grid_column":null,"grid_gap":null,"grid_row":null,"grid_template_areas":null,"grid_template_columns":null,"grid_template_rows":null,"height":null,"justify_content":null,"justify_items":null,"left":null,"margin":null,"max_height":null,"max_width":null,"min_height":null,"min_width":null,"object_fit":null,"object_position":null,"order":null,"overflow":null,"overflow_x":null,"overflow_y":null,"padding":null,"right":null,"top":null,"visibility":null,"width":null}},"67a1e91ecfa642088863afc2bd46bc32":{"model_module":"@jupyter-widgets/controls","model_module_version":"1.5.0","model_name":"HTMLModel","state":{"_dom_classes":[],"_model_module":"@jupyter-widgets/controls","_model_module_version":"1.5.0","_model_name":"HTMLModel","_view_count":null,"_view_module":"@jupyter-widgets/controls","_view_module_version":"1.5.0","_view_name":"HTMLView","description":"","description_tooltip":null,"layout":"IPY_MODEL_0720eb411806438eadf6250d10d6b43a","placeholder":"​","style":"IPY_MODEL_c118de86f01a49ceb1aae8d9b50f33fe","value":""}},"76afdbda3c374234b90afd420a7e5148":{"model_module":"@jupyter-widgets/controls","model_module_version":"1.5.0","model_name":"ProgressStyleModel","state":{"_model_module":"@jupyter-widgets/controls","_model_module_version":"1.5.0","_model_name":"ProgressStyleModel","_view_count":null,"_view_module":"@jupyter-widgets/base","_view_module_version":"1.2.0","_view_name":"StyleView","bar_color":null,"description_width":""}},"7c281c5c04614d5a8b5e97990594846a":{"model_module":"@jupyter-widgets/controls","model_module_version":"1.5.0","model_name":"HTMLModel","state":{"_dom_classes":[],"_model_module":"@jupyter-widgets/controls","_model_module_version":"1.5.0","_model_name":"HTMLModel","_view_count":null,"_view_module":"@jupyter-widgets/controls","_view_module_version":"1.5.0","_view_name":"HTMLView","description":"","description_tooltip":null,"layout":"IPY_MODEL_f8581c1d20d44414ac8babf7f2ed96c3","placeholder":"​","style":"IPY_MODEL_7c9995542ef944b2b44641faf5dc7ff6","value":" 0/11482 [00:06&lt;?, ?it/s]"}},"7c9995542ef944b2b44641faf5dc7ff6":{"model_module":"@jupyter-widgets/controls","model_module_version":"1.5.0","model_name":"DescriptionStyleModel","state":{"_model_module":"@jupyter-widgets/controls","_model_module_version":"1.5.0","_model_name":"DescriptionStyleModel","_view_count":null,"_view_module":"@jupyter-widgets/base","_view_module_version":"1.2.0","_view_name":"StyleView","description_width":""}},"831ba9f1d1384a8887c8dc0b2a65a136":{"model_module":"@jupyter-widgets/controls","model_module_version":"1.5.0","model_name":"DescriptionStyleModel","state":{"_model_module":"@jupyter-widgets/controls","_model_module_version":"1.5.0","_model_name":"DescriptionStyleModel","_view_count":null,"_view_module":"@jupyter-widgets/base","_view_module_version":"1.2.0","_view_name":"StyleView","description_width":""}},"83938d22a81a49b78a3c3ccd71794c52":{"model_module":"@jupyter-widgets/controls","model_module_version":"1.5.0","model_name":"HTMLModel","state":{"_dom_classes":[],"_model_module":"@jupyter-widgets/controls","_model_module_version":"1.5.0","_model_name":"HTMLModel","_view_count":null,"_view_module":"@jupyter-widgets/controls","_view_module_version":"1.5.0","_view_name":"HTMLView","description":"","description_tooltip":null,"layout":"IPY_MODEL_5527ed6d03534e189a67bad5808dfd18","placeholder":"​","style":"IPY_MODEL_18660aa114fc475bacc16294a75f8437","value":" 1/1 [2:03:03&lt;00:00, 7383.95s/it]"}},"8e44b1528b38475d9eb09de6b6882f27":{"model_module":"@jupyter-widgets/controls","model_module_version":"1.5.0","model_name":"HBoxModel","state":{"_dom_classes":[],"_model_module":"@jupyter-widgets/controls","_model_module_version":"1.5.0","_model_name":"HBoxModel","_view_count":null,"_view_module":"@jupyter-widgets/controls","_view_module_version":"1.5.0","_view_name":"HBoxView","box_style":"","children":["IPY_MODEL_26f816ab651247cabd80e2695be9e6f0","IPY_MODEL_440ea6884c414e45a0e1711298359144","IPY_MODEL_7c281c5c04614d5a8b5e97990594846a"],"layout":"IPY_MODEL_ad3e2fa699ef425197baf09410d3121d"}},"93b2af83e030485fa7913b1b5942581a":{"model_module":"@jupyter-widgets/base","model_module_version":"1.2.0","model_name":"LayoutModel","state":{"_model_module":"@jupyter-widgets/base","_model_module_version":"1.2.0","_model_name":"LayoutModel","_view_count":null,"_view_module":"@jupyter-widgets/base","_view_module_version":"1.2.0","_view_name":"LayoutView","align_content":null,"align_items":null,"align_self":null,"border":null,"bottom":null,"display":null,"flex":null,"flex_flow":null,"grid_area":null,"grid_auto_columns":null,"grid_auto_flow":null,"grid_auto_rows":null,"grid_column":null,"grid_gap":null,"grid_row":null,"grid_template_areas":null,"grid_template_columns":null,"grid_template_rows":null,"height":null,"justify_content":null,"justify_items":null,"left":null,"margin":null,"max_height":null,"max_width":null,"min_height":null,"min_width":null,"object_fit":null,"object_position":null,"order":null,"overflow":null,"overflow_x":null,"overflow_y":null,"padding":null,"right":null,"top":null,"visibility":null,"width":null}},"96f5d909ead84e4dbab72b9e32bd9c0e":{"model_module":"@jupyter-widgets/controls","model_module_version":"1.5.0","model_name":"HTMLModel","state":{"_dom_classes":[],"_model_module":"@jupyter-widgets/controls","_model_module_version":"1.5.0","_model_name":"HTMLModel","_view_count":null,"_view_module":"@jupyter-widgets/controls","_view_module_version":"1.5.0","_view_name":"HTMLView","description":"","description_tooltip":null,"layout":"IPY_MODEL_e1894092be2d454e8069de8d5d951c10","placeholder":"​","style":"IPY_MODEL_f09eab9f1d5d43519c36e1d67a7b319d","value":" 359/? [1:51:19&lt;00:00, 18.52s/it]"}},"981360389bbe4a99b3aad699e95b7019":{"model_module":"@jupyter-widgets/controls","model_module_version":"1.5.0","model_name":"HTMLModel","state":{"_dom_classes":[],"_model_module":"@jupyter-widgets/controls","_model_module_version":"1.5.0","_model_name":"HTMLModel","_view_count":null,"_view_module":"@jupyter-widgets/controls","_view_module_version":"1.5.0","_view_name":"HTMLView","description":"","description_tooltip":null,"layout":"IPY_MODEL_d7739b5609b44089ba8cc3f91158bc77","placeholder":"​","style":"IPY_MODEL_00f4bffdfa45409381bf813ba421eb01","value":" 0/5 [00:07&lt;?, ?it/s]"}},"a0db14142db94df58621932a81352c4e":{"model_module":"@jupyter-widgets/controls","model_module_version":"1.5.0","model_name":"HBoxModel","state":{"_dom_classes":[],"_model_module":"@jupyter-widgets/controls","_model_module_version":"1.5.0","_model_name":"HBoxModel","_view_count":null,"_view_module":"@jupyter-widgets/controls","_view_module_version":"1.5.0","_view_name":"HBoxView","box_style":"","children":["IPY_MODEL_bb64eefe1b1943bdb16f8dc35d4fed52","IPY_MODEL_a96406b0906442049699e1b463d14c01","IPY_MODEL_981360389bbe4a99b3aad699e95b7019"],"layout":"IPY_MODEL_93b2af83e030485fa7913b1b5942581a"}},"a5c20b92232f4275a6cc0c23e574c823":{"model_module":"@jupyter-widgets/controls","model_module_version":"1.5.0","model_name":"HTMLModel","state":{"_dom_classes":[],"_model_module":"@jupyter-widgets/controls","_model_module_version":"1.5.0","_model_name":"HTMLModel","_view_count":null,"_view_module":"@jupyter-widgets/controls","_view_module_version":"1.5.0","_view_name":"HTMLView","description":"","description_tooltip":null,"layout":"IPY_MODEL_01f38194e166489dadd88e614313f498","placeholder":"​","style":"IPY_MODEL_831ba9f1d1384a8887c8dc0b2a65a136","value":"100%"}},"a64e54f380f24786ae0fe0bcad6a1715":{"model_module":"@jupyter-widgets/base","model_module_version":"1.2.0","model_name":"LayoutModel","state":{"_model_module":"@jupyter-widgets/base","_model_module_version":"1.2.0","_model_name":"LayoutModel","_view_count":null,"_view_module":"@jupyter-widgets/base","_view_module_version":"1.2.0","_view_name":"LayoutView","align_content":null,"align_items":null,"align_self":null,"border":null,"bottom":null,"display":null,"flex":null,"flex_flow":null,"grid_area":null,"grid_auto_columns":null,"grid_auto_flow":null,"grid_auto_rows":null,"grid_column":null,"grid_gap":null,"grid_row":null,"grid_template_areas":null,"grid_template_columns":null,"grid_template_rows":null,"height":null,"justify_content":null,"justify_items":null,"left":null,"margin":null,"max_height":null,"max_width":null,"min_height":null,"min_width":null,"object_fit":null,"object_position":null,"order":null,"overflow":null,"overflow_x":null,"overflow_y":null,"padding":null,"right":null,"top":null,"visibility":null,"width":null}},"a6af67121bee4d7d83a2c770a4f3877c":{"model_module":"@jupyter-widgets/controls","model_module_version":"1.5.0","model_name":"ProgressStyleModel","state":{"_model_module":"@jupyter-widgets/controls","_model_module_version":"1.5.0","_model_name":"ProgressStyleModel","_view_count":null,"_view_module":"@jupyter-widgets/base","_view_module_version":"1.2.0","_view_name":"StyleView","bar_color":null,"description_width":""}},"a96406b0906442049699e1b463d14c01":{"model_module":"@jupyter-widgets/controls","model_module_version":"1.5.0","model_name":"FloatProgressModel","state":{"_dom_classes":[],"_model_module":"@jupyter-widgets/controls","_model_module_version":"1.5.0","_model_name":"FloatProgressModel","_view_count":null,"_view_module":"@jupyter-widgets/controls","_view_module_version":"1.5.0","_view_name":"ProgressView","bar_style":"danger","description":"","description_tooltip":null,"layout":"IPY_MODEL_ddaba0a109a94e13a7e6fa7ff9b4296c","max":5,"min":0,"orientation":"horizontal","style":"IPY_MODEL_194f09f03cf544ca9afa1c21d90a2d5a","value":0}},"ad3e2fa699ef425197baf09410d3121d":{"model_module":"@jupyter-widgets/base","model_module_version":"1.2.0","model_name":"LayoutModel","state":{"_model_module":"@jupyter-widgets/base","_model_module_version":"1.2.0","_model_name":"LayoutModel","_view_count":null,"_view_module":"@jupyter-widgets/base","_view_module_version":"1.2.0","_view_name":"LayoutView","align_content":null,"align_items":null,"align_self":null,"border":null,"bottom":null,"display":null,"flex":null,"flex_flow":null,"grid_area":null,"grid_auto_columns":null,"grid_auto_flow":null,"grid_auto_rows":null,"grid_column":null,"grid_gap":null,"grid_row":null,"grid_template_areas":null,"grid_template_columns":null,"grid_template_rows":null,"height":null,"justify_content":null,"justify_items":null,"left":null,"margin":null,"max_height":null,"max_width":null,"min_height":null,"min_width":null,"object_fit":null,"object_position":null,"order":null,"overflow":null,"overflow_x":null,"overflow_y":null,"padding":null,"right":null,"top":null,"visibility":null,"width":null}},"b032858ace264c50bfab39dab17816a7":{"model_module":"@jupyter-widgets/controls","model_module_version":"1.5.0","model_name":"FloatProgressModel","state":{"_dom_classes":[],"_model_module":"@jupyter-widgets/controls","_model_module_version":"1.5.0","_model_name":"FloatProgressModel","_view_count":null,"_view_module":"@jupyter-widgets/controls","_view_module_version":"1.5.0","_view_name":"ProgressView","bar_style":"success","description":"","description_tooltip":null,"layout":"IPY_MODEL_e06892c9b89c4242b9a9e1d1897bffcd","max":358,"min":0,"orientation":"horizontal","style":"IPY_MODEL_1b9863d1c50543bea4802d07150cc249","value":358}},"b03b7df490b845b69ba0deeceae74700":{"model_module":"@jupyter-widgets/base","model_module_version":"1.2.0","model_name":"LayoutModel","state":{"_model_module":"@jupyter-widgets/base","_model_module_version":"1.2.0","_model_name":"LayoutModel","_view_count":null,"_view_module":"@jupyter-widgets/base","_view_module_version":"1.2.0","_view_name":"LayoutView","align_content":null,"align_items":null,"align_self":null,"border":null,"bottom":null,"display":null,"flex":null,"flex_flow":null,"grid_area":null,"grid_auto_columns":null,"grid_auto_flow":null,"grid_auto_rows":null,"grid_column":null,"grid_gap":null,"grid_row":null,"grid_template_areas":null,"grid_template_columns":null,"grid_template_rows":null,"height":null,"justify_content":null,"justify_items":null,"left":null,"margin":null,"max_height":null,"max_width":null,"min_height":null,"min_width":null,"object_fit":null,"object_position":null,"order":null,"overflow":null,"overflow_x":null,"overflow_y":null,"padding":null,"right":null,"top":null,"visibility":null,"width":null}},"bb64eefe1b1943bdb16f8dc35d4fed52":{"model_module":"@jupyter-widgets/controls","model_module_version":"1.5.0","model_name":"HTMLModel","state":{"_dom_classes":[],"_model_module":"@jupyter-widgets/controls","_model_module_version":"1.5.0","_model_name":"HTMLModel","_view_count":null,"_view_module":"@jupyter-widgets/controls","_view_module_version":"1.5.0","_view_name":"HTMLView","description":"","description_tooltip":null,"layout":"IPY_MODEL_c459d940b35649f991ae70d7178340a1","placeholder":"​","style":"IPY_MODEL_e4c326a61e5b4ee8b6889d5093f86a2b","value":"  0%"}},"c118de86f01a49ceb1aae8d9b50f33fe":{"model_module":"@jupyter-widgets/controls","model_module_version":"1.5.0","model_name":"DescriptionStyleModel","state":{"_model_module":"@jupyter-widgets/controls","_model_module_version":"1.5.0","_model_name":"DescriptionStyleModel","_view_count":null,"_view_module":"@jupyter-widgets/base","_view_module_version":"1.2.0","_view_name":"StyleView","description_width":""}},"c459d940b35649f991ae70d7178340a1":{"model_module":"@jupyter-widgets/base","model_module_version":"1.2.0","model_name":"LayoutModel","state":{"_model_module":"@jupyter-widgets/base","_model_module_version":"1.2.0","_model_name":"LayoutModel","_view_count":null,"_view_module":"@jupyter-widgets/base","_view_module_version":"1.2.0","_view_name":"LayoutView","align_content":null,"align_items":null,"align_self":null,"border":null,"bottom":null,"display":null,"flex":null,"flex_flow":null,"grid_area":null,"grid_auto_columns":null,"grid_auto_flow":null,"grid_auto_rows":null,"grid_column":null,"grid_gap":null,"grid_row":null,"grid_template_areas":null,"grid_template_columns":null,"grid_template_rows":null,"height":null,"justify_content":null,"justify_items":null,"left":null,"margin":null,"max_height":null,"max_width":null,"min_height":null,"min_width":null,"object_fit":null,"object_position":null,"order":null,"overflow":null,"overflow_x":null,"overflow_y":null,"padding":null,"right":null,"top":null,"visibility":null,"width":null}},"c8887015d9584330b0a89a9840e87e2a":{"model_module":"@jupyter-widgets/controls","model_module_version":"1.5.0","model_name":"HBoxModel","state":{"_dom_classes":[],"_model_module":"@jupyter-widgets/controls","_model_module_version":"1.5.0","_model_name":"HBoxModel","_view_count":null,"_view_module":"@jupyter-widgets/controls","_view_module_version":"1.5.0","_view_name":"HBoxView","box_style":"","children":["IPY_MODEL_a5c20b92232f4275a6cc0c23e574c823","IPY_MODEL_103dd796c05e4872b39445765c81f4fd","IPY_MODEL_83938d22a81a49b78a3c3ccd71794c52"],"layout":"IPY_MODEL_2e7f447183ee4d5eb5ff1f5ab429ee14"}},"d7739b5609b44089ba8cc3f91158bc77":{"model_module":"@jupyter-widgets/base","model_module_version":"1.2.0","model_name":"LayoutModel","state":{"_model_module":"@jupyter-widgets/base","_model_module_version":"1.2.0","_model_name":"LayoutModel","_view_count":null,"_view_module":"@jupyter-widgets/base","_view_module_version":"1.2.0","_view_name":"LayoutView","align_content":null,"align_items":null,"align_self":null,"border":null,"bottom":null,"display":null,"flex":null,"flex_flow":null,"grid_area":null,"grid_auto_columns":null,"grid_auto_flow":null,"grid_auto_rows":null,"grid_column":null,"grid_gap":null,"grid_row":null,"grid_template_areas":null,"grid_template_columns":null,"grid_template_rows":null,"height":null,"justify_content":null,"justify_items":null,"left":null,"margin":null,"max_height":null,"max_width":null,"min_height":null,"min_width":null,"object_fit":null,"object_position":null,"order":null,"overflow":null,"overflow_x":null,"overflow_y":null,"padding":null,"right":null,"top":null,"visibility":null,"width":null}},"dbc13d97c84046bebef137c3935cb4e8":{"model_module":"@jupyter-widgets/base","model_module_version":"1.2.0","model_name":"LayoutModel","state":{"_model_module":"@jupyter-widgets/base","_model_module_version":"1.2.0","_model_name":"LayoutModel","_view_count":null,"_view_module":"@jupyter-widgets/base","_view_module_version":"1.2.0","_view_name":"LayoutView","align_content":null,"align_items":null,"align_self":null,"border":null,"bottom":null,"display":null,"flex":null,"flex_flow":null,"grid_area":null,"grid_auto_columns":null,"grid_auto_flow":null,"grid_auto_rows":null,"grid_column":null,"grid_gap":null,"grid_row":null,"grid_template_areas":null,"grid_template_columns":null,"grid_template_rows":null,"height":null,"justify_content":null,"justify_items":null,"left":null,"margin":null,"max_height":null,"max_width":null,"min_height":null,"min_width":null,"object_fit":null,"object_position":null,"order":null,"overflow":null,"overflow_x":null,"overflow_y":null,"padding":null,"right":null,"top":null,"visibility":null,"width":null}},"ddaba0a109a94e13a7e6fa7ff9b4296c":{"model_module":"@jupyter-widgets/base","model_module_version":"1.2.0","model_name":"LayoutModel","state":{"_model_module":"@jupyter-widgets/base","_model_module_version":"1.2.0","_model_name":"LayoutModel","_view_count":null,"_view_module":"@jupyter-widgets/base","_view_module_version":"1.2.0","_view_name":"LayoutView","align_content":null,"align_items":null,"align_self":null,"border":null,"bottom":null,"display":null,"flex":null,"flex_flow":null,"grid_area":null,"grid_auto_columns":null,"grid_auto_flow":null,"grid_auto_rows":null,"grid_column":null,"grid_gap":null,"grid_row":null,"grid_template_areas":null,"grid_template_columns":null,"grid_template_rows":null,"height":null,"justify_content":null,"justify_items":null,"left":null,"margin":null,"max_height":null,"max_width":null,"min_height":null,"min_width":null,"object_fit":null,"object_position":null,"order":null,"overflow":null,"overflow_x":null,"overflow_y":null,"padding":null,"right":null,"top":null,"visibility":null,"width":null}},"def5de72c60344d891e4eacadb07ded6":{"model_module":"@jupyter-widgets/controls","model_module_version":"1.5.0","model_name":"HBoxModel","state":{"_dom_classes":[],"_model_module":"@jupyter-widgets/controls","_model_module_version":"1.5.0","_model_name":"HBoxModel","_view_count":null,"_view_module":"@jupyter-widgets/controls","_view_module_version":"1.5.0","_view_name":"HBoxView","box_style":"","children":["IPY_MODEL_67a1e91ecfa642088863afc2bd46bc32","IPY_MODEL_b032858ace264c50bfab39dab17816a7","IPY_MODEL_96f5d909ead84e4dbab72b9e32bd9c0e"],"layout":"IPY_MODEL_3663be9dbaa145bf8895665920dab02b"}},"e06892c9b89c4242b9a9e1d1897bffcd":{"model_module":"@jupyter-widgets/base","model_module_version":"1.2.0","model_name":"LayoutModel","state":{"_model_module":"@jupyter-widgets/base","_model_module_version":"1.2.0","_model_name":"LayoutModel","_view_count":null,"_view_module":"@jupyter-widgets/base","_view_module_version":"1.2.0","_view_name":"LayoutView","align_content":null,"align_items":null,"align_self":null,"border":null,"bottom":null,"display":null,"flex":null,"flex_flow":null,"grid_area":null,"grid_auto_columns":null,"grid_auto_flow":null,"grid_auto_rows":null,"grid_column":null,"grid_gap":null,"grid_row":null,"grid_template_areas":null,"grid_template_columns":null,"grid_template_rows":null,"height":null,"justify_content":null,"justify_items":null,"left":null,"margin":null,"max_height":null,"max_width":null,"min_height":null,"min_width":null,"object_fit":null,"object_position":null,"order":null,"overflow":null,"overflow_x":null,"overflow_y":null,"padding":null,"right":null,"top":null,"visibility":null,"width":null}},"e1894092be2d454e8069de8d5d951c10":{"model_module":"@jupyter-widgets/base","model_module_version":"1.2.0","model_name":"LayoutModel","state":{"_model_module":"@jupyter-widgets/base","_model_module_version":"1.2.0","_model_name":"LayoutModel","_view_count":null,"_view_module":"@jupyter-widgets/base","_view_module_version":"1.2.0","_view_name":"LayoutView","align_content":null,"align_items":null,"align_self":null,"border":null,"bottom":null,"display":null,"flex":null,"flex_flow":null,"grid_area":null,"grid_auto_columns":null,"grid_auto_flow":null,"grid_auto_rows":null,"grid_column":null,"grid_gap":null,"grid_row":null,"grid_template_areas":null,"grid_template_columns":null,"grid_template_rows":null,"height":null,"justify_content":null,"justify_items":null,"left":null,"margin":null,"max_height":null,"max_width":null,"min_height":null,"min_width":null,"object_fit":null,"object_position":null,"order":null,"overflow":null,"overflow_x":null,"overflow_y":null,"padding":null,"right":null,"top":null,"visibility":null,"width":null}},"e4c326a61e5b4ee8b6889d5093f86a2b":{"model_module":"@jupyter-widgets/controls","model_module_version":"1.5.0","model_name":"DescriptionStyleModel","state":{"_model_module":"@jupyter-widgets/controls","_model_module_version":"1.5.0","_model_name":"DescriptionStyleModel","_view_count":null,"_view_module":"@jupyter-widgets/base","_view_module_version":"1.2.0","_view_name":"StyleView","description_width":""}},"f09eab9f1d5d43519c36e1d67a7b319d":{"model_module":"@jupyter-widgets/controls","model_module_version":"1.5.0","model_name":"DescriptionStyleModel","state":{"_model_module":"@jupyter-widgets/controls","_model_module_version":"1.5.0","_model_name":"DescriptionStyleModel","_view_count":null,"_view_module":"@jupyter-widgets/base","_view_module_version":"1.2.0","_view_name":"StyleView","description_width":""}},"f8581c1d20d44414ac8babf7f2ed96c3":{"model_module":"@jupyter-widgets/base","model_module_version":"1.2.0","model_name":"LayoutModel","state":{"_model_module":"@jupyter-widgets/base","_model_module_version":"1.2.0","_model_name":"LayoutModel","_view_count":null,"_view_module":"@jupyter-widgets/base","_view_module_version":"1.2.0","_view_name":"LayoutView","align_content":null,"align_items":null,"align_self":null,"border":null,"bottom":null,"display":null,"flex":null,"flex_flow":null,"grid_area":null,"grid_auto_columns":null,"grid_auto_flow":null,"grid_auto_rows":null,"grid_column":null,"grid_gap":null,"grid_row":null,"grid_template_areas":null,"grid_template_columns":null,"grid_template_rows":null,"height":null,"justify_content":null,"justify_items":null,"left":null,"margin":null,"max_height":null,"max_width":null,"min_height":null,"min_width":null,"object_fit":null,"object_position":null,"order":null,"overflow":null,"overflow_x":null,"overflow_y":null,"padding":null,"right":null,"top":null,"visibility":null,"width":null}}},"version_major":2,"version_minor":0}
+</script>
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
