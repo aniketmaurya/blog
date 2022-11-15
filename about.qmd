@@ -1,0 +1,31 @@
+---
+title: "About"
+image: https://avatars.githubusercontent.com/u/21018714?s=400&u=b47cb5eb401714a0e38aa8d32ec7031e5c30e346&v=4
+about:
+  template: jolla
+  links:
+    - icon: twitter
+      text: Twitter
+      href: https://twitter.com/aniketmaurya
+    - icon: linkedin
+      text: LinkedIn
+      href: https://linkedin.com/aniketmaurya
+    - icon: github
+      text: Github
+      href: https://github.com/aniketmaurya
+
+---
+
+👋 I’m a Developer Advocate at [Lightning AI](https://lightning.ai) 🥑⚡️.
+
+I build Intelligent Software with ML and create/maintain some cool open-source ML/DL/Python libraries.  
+I’ve created [Gradsflow](https://github.com/gradsflow/gradsflow) and [Chitra](https://chitra.readthedocs.io/en/latest/) - Python Libraries with aim to simplify AutoML and MLOps.
+
+I love building problem solving products that leverage Artificial Intelligence.
+I've expertise in building and deploying scalable Deep Learning system in production. I've worked on complete end-to-end process of Deep Learning i.e. Data creation, Model Training, API Development to Deployment. 
+
+I believe in continuous learning, open-source and knowledge sharing.
+Started my [YouTube channel](https://www.youtube.com/channel/UCRuFsj94hWecPkuEr4f5Xww) to share educational video tutorials and tech Meetup on Machine Learning and Python Software development.
+
+
+Contact me to talk about ML/AI, freelancing or consulation.
