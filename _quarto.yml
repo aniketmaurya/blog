@@ -5,6 +5,7 @@ project:
 website:
   title: "AI with Aniket"
   favicon: assets/favicon.ico
+  repo-url: https://github.com/aniketmaurya/blog
   navbar:
     right:
       - about.qmd
@@ -12,6 +13,7 @@ website:
         href: https://github.com/aniketmaurya
       - icon: twitter
         href: https://twitter.com/aniketmaurya
+  image: profile.png
   twitter-card: true
   google-analytics: "UA-156199072-2"
 
