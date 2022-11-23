@@ -4,6 +4,7 @@ project:
 
 website:
   title: "AI with Aniket"
+  favicon: assets/favicon.ico
   navbar:
     right:
       - about.qmd
