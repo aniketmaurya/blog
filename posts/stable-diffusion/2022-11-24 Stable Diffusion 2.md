@@ -5,7 +5,7 @@ badges: true
 categories:
 - text-to-image
 - image generation
-image: ../profile.png
+image: sd2release.png
 date: '2022-11-24'
 keywords: image generation, stable diffusion, deep learning,
 layout: post
@@ -14,8 +14,11 @@ toc: true
 
 While the world was already amazed by the performance of open source text to image model, Stable Diffusion 1.x. Stability AI has released a new version with a lot of improvements.
 
+![](https://raw.githubusercontent.com/Stability-AI/stablediffusion/main/assets/stable-samples/txt2img/768/merged-0006.png)
+![](https://raw.githubusercontent.com/Stability-AI/stablediffusion/main/assets/stable-samples/txt2img/merged-0003.png)
 
-List of notable updates:
+
+## List of notable updates:
 
 * Trained using a new text encoder, OpenCLIP, developed by LAION with support from Stability AI.
 * The text-to-image models can now generate images with default resolutions of both 512x512 pixels and 768x768 pixels.
