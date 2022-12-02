@@ -3,6 +3,7 @@
     "listing": "/index.html",
     "items": [
       "/posts/2022-11-20 Conditional variables.html",
+      "/posts/learning-rust/2022-11-29-learning-rust.html",
       "/posts/stable-diffusion/2022-11-24 Stable Diffusion 2.html",
       "/posts/2022-11-24 Async IO in Python.html",
       "/posts/2022-04-10 torchdata.html",
