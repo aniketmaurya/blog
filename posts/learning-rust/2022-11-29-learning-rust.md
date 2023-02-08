@@ -5,7 +5,7 @@ badges: true
 categories:
 - rust
 - notes
-image: sd2release.png
+image: ../../profile.png
 date: '2022-11-29'
 keywords: programming, coding, rust
 layout: post
