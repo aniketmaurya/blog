@@ -17,3 +17,4 @@ __pycache__
 _site/
 /.quarto/
 *.nojekyll
+docs/
