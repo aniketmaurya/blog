@@ -1,8 +1,3 @@
 # How to publish?
 
-```
-# 1. quarto cli
-quarto publish
-
-# 2. select gh-pages
-````
+[Github Action](./.github/workflows/publish.yml) automatically renders and pushes the rendered files to `gh-pages` branch.
