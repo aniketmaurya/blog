@@ -15,5 +15,5 @@ _notebooks/.ipynb_checkpoints
 __pycache__
 .DS_Store
 _site/
-.*
 /.quarto/
+*.nojekyll
