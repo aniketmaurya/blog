@@ -6,11 +6,11 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="dcterms.date" content="2022-11-29">
-<meta name="keywords" content="programming, coding, rust">
-<meta name="description" content="Documentation of learning Rust">
+<meta name="dcterms.date" content="2022-11-20">
+<meta name="keywords" content="Python">
+<meta name="description" content="Conditional variable and lock in Python">
 
-<title>AI with Aniket - My first day of learning Rust 🦀</title>
+<title>AI with Aniket - Conditional variable and lock in Python</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -89,25 +89,25 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </style>
 
 
-<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
-<script src="../../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="../../site_libs/quarto-search/fuse.min.js"></script>
-<script src="../../site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="../../">
-<link href="../../assets/favicon.ico" rel="icon">
-<script src="../../site_libs/quarto-html/quarto.js"></script>
-<script src="../../site_libs/quarto-html/popper.min.js"></script>
-<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="../../site_libs/quarto-html/anchor.min.js"></script>
-<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../assets/favicon.ico" rel="icon">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -143,10 +143,10 @@ ga('send', {
 </script>
 
 
-<link rel="stylesheet" href="../../styles.css">
-<meta name="twitter:title" content="AI with Aniket - My first day of learning Rust 🦀">
-<meta name="twitter:description" content="Documentation of learning Rust">
-<meta name="twitter:image" content="../../profile.png">
+<link rel="stylesheet" href="../styles.css">
+<meta name="twitter:title" content="AI with Aniket - Conditional variable and lock in Python">
+<meta name="twitter:description" content="Conditional variable and lock in Python">
+<meta name="twitter:image" content="https://images.pexels.com/photos/1029635/pexels-photo-1029635.jpeg?auto=compress">
 <meta name="twitter:card" content="summary_large_image">
 </head>
 
@@ -157,7 +157,7 @@ ga('send', {
     <nav class="navbar navbar-expand-lg navbar-dark ">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container">
-    <a class="navbar-brand" href="../../index.html">
+    <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">AI with Aniket</span>
     </a>
   </div>
@@ -167,7 +167,7 @@ ga('send', {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../../about.html">
+    <a class="nav-link" href="../about.html">
  <span class="menu-text">About</span></a>
   </li>  
   <li class="nav-item compact">
@@ -193,15 +193,14 @@ ga('send', {
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">My first day of learning Rust 🦀</h1>
+      <h1 class="title">Conditional variable and lock in Python</h1>
                   <div>
         <div class="description">
-          Documentation of learning Rust
+          Conditional variable and lock in Python
         </div>
       </div>
                           <div class="quarto-categories">
-                <div class="quarto-category">rust</div>
-                <div class="quarto-category">notes</div>
+                <div class="quarto-category">python</div>
               </div>
                   </div>
   </div>
@@ -213,7 +212,7 @@ ga('send', {
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">November 29, 2022</p>
+        <p class="date">November 20, 2022</p>
       </div>
     </div>
     
@@ -233,23 +232,525 @@ ga('send', {
 
 
 
-<p>I have been using Python since my college (2018), it has allowed me to experiment my ideas quickly without worrying a lot about syntax and data structures. I could quickly implement complex algorithm and do some operations in a single line that would take more than 3 LOC in other languages like Java.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># swapping variable in Python</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> <span class="dv">1</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> <span class="dv">2</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>a, b <span class="op">=</span> b, a</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Today, I am learning Rust. I am particularly interested in this programming language because of its use cases in wide areas like optimized image resize and creating optimized programs and binding it with other language like Python.</p>
-<p>Now let’s talk about Rust 🦀</p>
-<p><strong>How to create a dynamic string?</strong></p>
-<p>We can compare it with Python staticmethod <code>SomeClass.somemethod</code>, with <code>::</code> instead of <code>.</code>.</p>
-<blockquote class="blockquote">
-<p>The double colon :: operator allows us to namespace this particular from function under the String type rather than using some sort of name like string_from. (source)[https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html#the-string-type]</p>
-</blockquote>
-<div class="sourceCode" id="cb2"><pre class="sourceCode rust code-with-copy"><code class="sourceCode rust"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> s <span class="op">=</span> <span class="dt">String</span><span class="pp">::</span>from(<span class="st">"hello"</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>This string is mutable and to add more characters we can do the following -</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode rust code-with-copy"><code class="sourceCode rust"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>    s<span class="op">.</span>push_str(<span class="st">", world!"</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<!-- ## Memory Management in Rust (Owenership) -->
+<div class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> threading <span class="im">import</span> Condition, Lock, Thread</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> random</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>found_divisible <span class="op">=</span> <span class="va">False</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>num <span class="op">=</span> <span class="va">None</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>cond_var <span class="op">=</span> Condition()</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>exit_prog <span class="op">=</span> <span class="va">False</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> divisible(x):</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> x<span class="op">%</span><span class="dv">5</span><span class="op">==</span><span class="dv">0</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> finder():</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="kw">global</span> found_divisible, num, exit_prog</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> <span class="kw">not</span> exit_prog:</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>        x <span class="op">=</span> random.randint(<span class="dv">1</span>, <span class="dv">1000</span>)</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> divisible(x):</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>            cond_var.acquire()        </span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>            num <span class="op">=</span> x</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>            found_divisible <span class="op">=</span> <span class="va">True</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>            cond_var.notify()</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>            cond_var.release()</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> printer():</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>    <span class="kw">global</span> num, found_divisible, exit_prog</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> <span class="kw">not</span> exit_prog:</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>        cond_var.acquire()</span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>        <span class="cf">while</span> <span class="kw">not</span> found_divisible <span class="kw">and</span> <span class="kw">not</span> exit_prog:</span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>            cond_var.wait()</span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(num)</span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>        found_divisible <span class="op">=</span> <span class="va">False</span></span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>        cond_var.release()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>printerThread <span class="op">=</span> Thread(target<span class="op">=</span>printer)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>printerThread.start()</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>finderThread <span class="op">=</span> Thread(target<span class="op">=</span>finder)</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>finderThread.start()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>525
+735
+930
+580
+100
+880
+320
+780
+720
+265
+965
+740
+375
+40
+835
+505
+120
+290
+985
+720
+745
+175</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Let the threads run for 3 seconds</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> time</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>time.sleep(<span class="dv">3</span>)</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Let the threads exit</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>exit_prog <span class="op">=</span> <span class="va">True</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>cond_var.acquire()</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>cond_var.notifyAll()</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>cond_var.release()</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>printerThread.join()</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>finderThread.join()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>370
+5
+520
+160
+835
+45
+490
+765
+265
+245
+605
+105
+90
+855
+775
+85
+760
+635
+565
+740
+845
+475
+655
+555
+705
+435
+920
+520
+970
+705
+770
+425
+530
+645
+380
+980
+650
+190
+640
+820
+785
+95
+110
+135
+815
+545
+330
+165
+950
+235
+575
+915
+145
+985
+515
+690
+775
+335
+260
+995
+165
+840
+315
+630
+825
+310
+915
+635
+885
+995
+250
+410
+470
+465
+395
+895
+990
+770
+360
+165
+470
+905
+385
+70
+905
+25
+765
+810
+915
+320
+110
+520
+775
+20
+415
+450
+15
+335
+495
+830
+615
+115
+300
+275
+475
+300
+450
+415
+445
+450
+500
+425
+370
+325
+670
+235
+1000
+650
+135
+340
+365
+605
+280
+520
+415
+675
+965
+180
+150
+580
+985
+85
+790
+835
+215
+550
+275
+285
+145
+5
+595
+340
+420
+885
+15
+695
+555
+890
+280
+630
+955
+550
+505
+470
+95
+595
+915
+440
+740
+335
+960
+400
+980
+245
+645
+995
+385
+190
+285
+585
+230
+330
+520
+915
+320
+225
+250
+755
+670
+995
+140
+430
+125
+195
+135
+745
+475
+655
+850
+295
+675
+735
+945
+155
+850
+335
+940
+235
+30
+370
+75
+55
+765
+645
+420
+940
+495
+520
+235
+410
+480
+465
+625
+610
+310
+615
+810
+355
+285
+290
+490
+350
+635
+785
+450
+235
+785
+80
+440
+90
+615
+365
+255
+310
+320
+90
+700
+85
+860
+950
+475
+670
+60
+15
+705
+30
+150
+810
+105
+920
+10
+40
+820
+610
+305
+75
+170
+135
+280
+150
+640
+405
+120
+410
+490
+575
+655
+580
+910
+545
+605
+25
+205
+195
+305
+145
+325
+850
+135
+505
+315
+835
+320
+555
+110
+250
+510
+745
+645
+915
+690
+835
+310
+385
+430
+450
+20
+30
+615
+330
+930
+685
+255
+130
+540
+305
+995
+440
+715
+585
+65
+870
+210
+640
+55
+720
+895
+410
+875
+600
+615
+400
+890
+210
+285
+740
+140
+675
+560
+360
+665
+500
+925
+545
+495
+590
+610
+320
+935
+710
+795
+405
+395
+80
+60
+610
+880
+955
+665
+840
+790
+715
+100
+875
+740
+675
+695
+645
+400
+25
+245
+560
+320
+940
+670
+165
+450
+610
+480
+220
+20
+560
+45
+550
+750
+135
+615
+65
+890
+120
+405
+90
+575
+495
+200
+590
+140
+310
+645
+685
+735
+10
+640
+400
+540
+155
+630
+240
+785
+300
+895
+920
+875
+645
+815
+345
+360
+925
+95
+890
+580
+630
+945
+255
+610
+260
+930
+885
+340
+300
+955
+830
+235
+890
+105
+40
+460
+315
+305
+955
+990
+395
+30
+850
+275</code></pre>
+</div>
+</div>
 
 
 

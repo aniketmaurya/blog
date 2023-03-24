@@ -6,11 +6,11 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="dcterms.date" content="2022-11-29">
-<meta name="keywords" content="programming, coding, rust">
-<meta name="description" content="Documentation of learning Rust">
+<meta name="dcterms.date" content="2023-01-31">
+<meta name="keywords" content="face recognition, tensorflow, deep learning, python">
+<meta name="description" content="Launch Lightning from remote machine">
 
-<title>AI with Aniket - My first day of learning Rust 🦀</title>
+<title>AI with Aniket - Using Lightning cloud from Remote machine</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -89,25 +89,25 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </style>
 
 
-<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
-<script src="../../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="../../site_libs/quarto-search/fuse.min.js"></script>
-<script src="../../site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="../../">
-<link href="../../assets/favicon.ico" rel="icon">
-<script src="../../site_libs/quarto-html/quarto.js"></script>
-<script src="../../site_libs/quarto-html/popper.min.js"></script>
-<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="../../site_libs/quarto-html/anchor.min.js"></script>
-<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../assets/favicon.ico" rel="icon">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -142,11 +142,12 @@ ga('send', {
 });
 </script>
 
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
-<link rel="stylesheet" href="../../styles.css">
-<meta name="twitter:title" content="AI with Aniket - My first day of learning Rust 🦀">
-<meta name="twitter:description" content="Documentation of learning Rust">
-<meta name="twitter:image" content="../../profile.png">
+<link rel="stylesheet" href="../styles.css">
+<meta name="twitter:title" content="AI with Aniket - Using Lightning cloud from Remote machine">
+<meta name="twitter:description" content="Launch Lightning from remote machine">
+<meta name="twitter:image" content="../profile.png">
 <meta name="twitter:card" content="summary_large_image">
 </head>
 
@@ -157,7 +158,7 @@ ga('send', {
     <nav class="navbar navbar-expand-lg navbar-dark ">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container">
-    <a class="navbar-brand" href="../../index.html">
+    <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">AI with Aniket</span>
     </a>
   </div>
@@ -167,7 +168,7 @@ ga('send', {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../../about.html">
+    <a class="nav-link" href="../about.html">
  <span class="menu-text">About</span></a>
   </li>  
   <li class="nav-item compact">
@@ -193,15 +194,14 @@ ga('send', {
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">My first day of learning Rust 🦀</h1>
+      <h1 class="title">Using Lightning cloud from Remote machine</h1>
                   <div>
         <div class="description">
-          Documentation of learning Rust
+          Launch Lightning from remote machine
         </div>
       </div>
                           <div class="quarto-categories">
-                <div class="quarto-category">rust</div>
-                <div class="quarto-category">notes</div>
+                <div class="quarto-category">Lightning AI</div>
               </div>
                   </div>
   </div>
@@ -213,7 +213,7 @@ ga('send', {
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">November 29, 2022</p>
+        <p class="date">January 31, 2023</p>
       </div>
     </div>
     
@@ -225,7 +225,20 @@ ga('send', {
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#face-verification-vs.-face-recognition" id="toc-face-verification-vs.-face-recognition" class="nav-link active" data-scroll-target="#face-verification-vs.-face-recognition">Face Verification vs.&nbsp;Face Recognition</a></li>
+  <li><a href="#why-pixel-by-pixel-comparison-of-images-is-a-bad-idea" id="toc-why-pixel-by-pixel-comparison-of-images-is-a-bad-idea" class="nav-link" data-scroll-target="#why-pixel-by-pixel-comparison-of-images-is-a-bad-idea">Why pixel-by-pixel comparison of images is&nbsp;a&nbsp;bad&nbsp;idea?</a></li>
+  <li><a href="#face-embedding-come-to-the-rescue" id="toc-face-embedding-come-to-the-rescue" class="nav-link" data-scroll-target="#face-embedding-come-to-the-rescue">Face Embedding come to the rescue</a>
+  <ul class="collapse">
+  <li><a href="#how-to-finetune-embeddings" id="toc-how-to-finetune-embeddings" class="nav-link" data-scroll-target="#how-to-finetune-embeddings">How to finetune embeddings?</a></li>
+  </ul></li>
+  <li><a href="#face-verification" id="toc-face-verification" class="nav-link" data-scroll-target="#face-verification">Face Verification</a></li>
+  <li><a href="#face-recognition" id="toc-face-recognition" class="nav-link" data-scroll-target="#face-recognition">Face Recognition</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content quarto-banner-title-block" id="quarto-document-content">
@@ -233,25 +246,89 @@ ga('send', {
 
 
 
-<p>I have been using Python since my college (2018), it has allowed me to experiment my ideas quickly without worrying a lot about syntax and data structures. I could quickly implement complex algorithm and do some operations in a single line that would take more than 3 LOC in other languages like Java.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># swapping variable in Python</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> <span class="dv">1</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> <span class="dv">2</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>a, b <span class="op">=</span> b, a</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Today, I am learning Rust. I am particularly interested in this programming language because of its use cases in wide areas like optimized image resize and creating optimized programs and binding it with other language like Python.</p>
-<p>Now let’s talk about Rust 🦀</p>
-<p><strong>How to create a dynamic string?</strong></p>
-<p>We can compare it with Python staticmethod <code>SomeClass.somemethod</code>, with <code>::</code> instead of <code>.</code>.</p>
+<p>AI is revolutionizing the world. Face recognition is one such spectrum of it. Almost everyone uses face recognition systems — on our mobile, Facebook, Photo gallery apps or advanced security cameras. Learn how these systems are able to recognize our faces.</p>
+<p><em>This article is inspired by the deeplearning.ai course on FaceNet.</em></p>
+<p><img src="https://cdn-images-1.medium.com/max/2000/1*t3DEmVOWOuWjIo_TjcpxNQ.gif" class="img-fluid"></p>
+<section id="face-verification-vs.-face-recognition" class="level2">
+<h2 class="anchored" data-anchor-id="face-verification-vs.-face-recognition">Face Verification vs.&nbsp;Face Recognition</h2>
+<p><strong>Face Verification</strong> checks “is this the claimed person?”. For example, in school, you go with your ID card and the invigilator verifies your face with the ID card. This is Face Verification. A mobile phone that unlocks using our face is also using face verification. It is 1:1 matching problem.</p>
+<p>Now suppose the invigilator knows everyone by their name. So, you decide to go there without an ID card. The invigilator identifies your face and lets you in. This is Face Recognition. <strong>Face Recognition</strong> deals with “who is this person?” problem. We can say that it is a 1:K problem.</p>
+</section>
+<section id="why-pixel-by-pixel-comparison-of-images-is-a-bad-idea" class="level2">
+<h2 class="anchored" data-anchor-id="why-pixel-by-pixel-comparison-of-images-is-a-bad-idea">Why pixel-by-pixel comparison of images is&nbsp;a&nbsp;bad&nbsp;idea?</h2>
+<p>A simple way for face verification can be comparing two images pixel-by-pixel and if the threshold between images is less than a threshold then we can say that they’re the same person. But since the pixel values in an image change dramatically even with a slight change of light, position or orientation. So, this method doesn’t work well.</p>
+</section>
+<section id="face-embedding-come-to-the-rescue" class="level2">
+<h2 class="anchored" data-anchor-id="face-embedding-come-to-the-rescue">Face Embedding come to the rescue</h2>
+<p>The <em>embedding</em> is represented by f (x), a d-dimensional vector. It encodes an image ‘x’ into a d-dimensional Euclidean space. The face embedding of two images of the same person are similar to each other and that of different persons are very different.</p>
+<p>In ConvNet architectures, the initial layers learn to recognize basic patterns like straight lines, edges, circles, etc. and the deeper layers learn to recognize more complex patterns like numbers, faces, cars, etc.</p>
+<p>To get our embedding we feed the image into a pre-trained model then run a forward propagation and extract the vector from some deeper Fully-Connected layer. You can learn the basics of CNN <a href="https://medium.com/@aniketmaurya/not-just-introduction-to-convolutional-neural-networks-part-2-a7ac2723e30d">here</a>.</p>
+<section id="how-to-finetune-embeddings" class="level3">
+<h3 class="anchored" data-anchor-id="how-to-finetune-embeddings">How to finetune embeddings?</h3>
+<p><em><a href="https://en.wikipedia.org/wiki/Triplet_loss">The Triplet Loss</a></em> function takes the responsibility to <em>push</em> the embeddings of two images of the same person (Anchor and Positive) closer together while <em>pulling</em> the embeddings of two images of different persons (Anchor, Negative) further apart.</p>
+<p><img src="https://cdn-images-1.medium.com/max/3840/1*CKnxCH4SNOnTqctwX-ViKQ.png" class="img-fluid" alt="Source: Coursera"><em>Source: <a href="http://deeplearning.ai">Coursera</a></em></p>
+<p><span class="math inline">\(\|\|f(X1) — f(X2)\|\|²\)</span> is the degree of similarity between image X1 and X2. If it’s smaller than a chosen threshold then both are the same person.</p>
+<p>If you’re wondering “what this <span class="math inline">\(\|A\|\)</span> weird symbol is?”, it’s called <em>Frobenius Norm</em>.</p>
+<p>The distance between <em>Anchor</em> and <em>Positive</em> images should be less and the distance between <em>Anchor</em> and <em>Negative</em> images should be high.</p>
+<p>i.e.&nbsp;<span class="math inline">\(∥f(Anchor) — f(Positive)∥² ≤ ∥f(Anchor) — f(Negative)∥²\)</span>.</p>
+<p>Training a Face recognition model is computationally expensive so it’s recommended to download a <a href="https://github.com/iwantooxxoox/Keras-OpenFace">pre-trained model</a>.</p>
+<p>Start with creating a database of persons containing an embedding vector for each.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode py code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#create a dictionary database</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>db <span class="op">=</span> <span class="bu">dict</span>()</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co">#encoding(image_path) converts image to embedding</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>db[<span class="st">'person1'</span>] <span class="op">=</span> encoding(<span class="st">'person1.jpg'</span>)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>db[<span class="st">'person2'</span>] <span class="op">=</span> encoding(<span class="st">'person2.jpg'</span>)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>db[<span class="st">'person3'</span>] <span class="op">=</span> encoding(<span class="st">'person3.jpg'</span>)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>db[<span class="st">'person4'</span>] <span class="op">=</span> encoding(<span class="st">'person4.jpg'</span>)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>db[<span class="st">'person5'</span>] <span class="op">=</span> encoding(<span class="st">'person5.jpg'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+</section>
+<section id="face-verification" class="level2">
+<h2 class="anchored" data-anchor-id="face-verification">Face Verification</h2>
+<p>Now that we have created our database, we can define a function that accepts image embedding and name of the person as the argument and it will verify if they are the same person.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode py code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> verify(embedding, person_name):</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="co"># numpy.linalg.norm calculates the Frobenius Norm</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    dist <span class="op">=</span> np.linalg.norm(embedding <span class="op">-</span> db[person_name])</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Chosen threshold is 0.7  </span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> dist <span class="op">&lt;</span> <span class="fl">0.7</span>:</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">"Verified! Welcome "</span> <span class="op">+</span> person_name)</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">"Person name and face didn't match!"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Hurray 😎! We created our Face Verification system. Now let’s create the Face Recognition System. If you remember, a person doesn’t need any ID in the face recognition system. He just needs to show his face to the camera.</p>
+</section>
+<section id="face-recognition" class="level2">
+<h2 class="anchored" data-anchor-id="face-recognition">Face Recognition</h2>
+<p>In Face recognition, the distance will be calculated for all the images in the database against the input embedding and the smallest distance has to be searched.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode py code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> recognize_me(input_embedding):</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Set min_dist to infinity</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    min_dist <span class="op">=</span> np.inf</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Iterate over the database to calulate distance for each person*</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> (name, emb) <span class="kw">in</span> db.items():</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Compute the distance*</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>        curr_dist <span class="op">=</span> np.linalg.norm(input_embedding <span class="op">-</span> emb)</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>        <span class="co"># identity is set to the name of the person from the database whose distance is smallest against the input encoding</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> curr_dist <span class="op">&lt;</span> min_dist:</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>            min_dist <span class="op">=</span> curr_dist</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>            identity <span class="op">=</span> name</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> min_dist <span class="op">&gt;</span> <span class="fl">0.7</span>:</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">"Sorry! You’re not in the database."</span>)</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span> (<span class="st">"Hi! Welcome "</span> <span class="op">+</span> identity)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <blockquote class="blockquote">
-<p>The double colon :: operator allows us to namespace this particular from function under the String type rather than using some sort of name like string_from. (source)[https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html#the-string-type]</p>
+<p>Congratulations!! 👏👏 You have created your own Face Recognition system.</p>
 </blockquote>
-<div class="sourceCode" id="cb2"><pre class="sourceCode rust code-with-copy"><code class="sourceCode rust"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> s <span class="op">=</span> <span class="dt">String</span><span class="pp">::</span>from(<span class="st">"hello"</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>This string is mutable and to add more characters we can do the following -</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode rust code-with-copy"><code class="sourceCode rust"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>    s<span class="op">.</span>push_str(<span class="st">", world!"</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<!-- ## Memory Management in Rust (Owenership) -->
+<p>You can provide your feedback in comment section below.</p>
+<p><strong>Follow me on <a href="https://twitter.com/aniketmauryaTwitter">Twitter</a></strong></p>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
