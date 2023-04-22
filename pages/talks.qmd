@@ -22,6 +22,8 @@ IIT Guwahati MLRW-23 | Scaling PyTorch Code with Fabric, PyTorch Lightning and L
     width="426" height="240"
 >}}
 
+---
+
 ### 2023-02-03
 
 Code walkthrough with Josh Starmer (CEO StatQuest): Building ML Pipelines Like Legos with Scikit-Learn and Lightning AI

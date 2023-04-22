@@ -6,6 +6,7 @@ website:
   title: "AI with Aniket"
   favicon: assets/favicon.ico
   repo-url: https://github.com/aniketmaurya/blog
+  site-url: https://aniketmaurya.com
 
   navbar:
     background: primary

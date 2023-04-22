@@ -1,17 +1,17 @@
 ---
+title: Deploy Machine Learning Web Apps for Free
+description: Learn to deploy Python Tensorflow & FastAPI Web app on Heroku Cloud in 5 minutes.
 aliases:
 - /python/2020/10/15/deploy-python-heroku
 badges: true
 categories:
 - python
 date: '2020-10-15'
-description: Learn to deploy Python Tensorflow & FastAPI Web app on Heroku Cloud in
-  5 minutes.
+
 image: https://cdn-images-1.medium.com/max/6706/0*m45LdHFZa0noxH-0
 keywords: tensorflow, fastapi, python, machine learning, computer vision, deploy,
   cloud
 layout: post
-title: Deploy Machine Learning Web Apps for Free
 toc: false
 
 ---
