@@ -9,7 +9,7 @@ image: sd2release.png
 date: '2022-11-24'
 keywords: image generation, stable diffusion, deep learning,
 layout: post
-toc: true
+toc: false
 ---
 
 While the world was already amazed by the performance of open source text to image model, Stable Diffusion 1.x. Stability AI has released a new version with a lot of improvements.

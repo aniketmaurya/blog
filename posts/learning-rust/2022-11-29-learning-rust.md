@@ -5,7 +5,6 @@ badges: true
 categories:
 - rust
 - notes
-image: /assets/blog.png
 date: '2022-11-29'
 keywords: programming, coding, rust
 layout: post

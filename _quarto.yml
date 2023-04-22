@@ -30,8 +30,10 @@ website:
       - icon: twitter
         href: https://twitter.com/aniketmaurya
 
-  image: profile.png
-  twitter-card: true
+  image: /assets/blog.png
+  open-graph: true
+  twitter-card:
+    site: "@aniketmaurya"
   google-analytics: "G-QD11JWMMPF"
 
 format:
