@@ -65,7 +65,7 @@ P(A|B)P(B) = P(B|A)P(A)
 $P(A|B) = \frac{P(B|A)P(A)}{P(B)}$
 
 ## Conditional Probability
-It is the probability of one event when occurence of the other is given.
+It is the probability of one event when occurrence of the other is given.
 
 Consider two events A and B, given that B has occurred. Then the probability of A given B is:
 

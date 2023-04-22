@@ -140,7 +140,7 @@ After you have trained and evaluated your NN model on test set you can download 
 tf.keras.models.save_model("my_image_classifier")
 ```
 
-It saves both the model’s architecture and the value of all the model parameters for every layer (All trained weights and biases). This *saved_model* can be loaded to TF serving for deployement purpose.
+It saves both the model’s architecture and the value of all the model parameters for every layer (All trained weights and biases). This *saved_model* can be loaded to TF serving for deployment purpose.
 
 If you want to use your trained model for inference, just load it:
 

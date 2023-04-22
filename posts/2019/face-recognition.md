@@ -76,11 +76,11 @@ db['person5'] = encoding('person5.jpg')
 Now that we have created our database, we can define a function that accepts image embedding and name of the person as the argument and it will verify if they are the same person.
 ```py
 def verify(embedding, person_name):
-        
+
     # numpy.linalg.norm calculates the Frobenius Norm
     dist = np.linalg.norm(embedding - db[person_name])
-    
-    # Chosen threshold is 0.7  
+
+    # Chosen threshold is 0.7
     if dist < 0.7:
         print("Verified! Welcome " + person_name)
     else:
@@ -97,10 +97,10 @@ def recognize_me(input_embedding):
 
     # Set min_dist to infinity
     min_dist = np.inf
-    
-    # Iterate over the database to calulate distance for each person*
+
+    # Iterate over the database to calculate distance for each person*
     for (name, emb) in db.items():
-        
+
         # Compute the distance*
         curr_dist = np.linalg.norm(input_embedding - emb)
 
@@ -108,7 +108,7 @@ def recognize_me(input_embedding):
         if curr_dist < min_dist:
             min_dist = curr_dist
             identity = name
-    
+
     if min_dist > 0.7:
         print("Sorry! You’re not in the database.")
     else:
