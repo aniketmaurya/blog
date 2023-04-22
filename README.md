@@ -3,7 +3,7 @@
 # How to publish?
 
 ## Method 1:
-[Github Action](./.github/workflows/publish.yml) automatically renders and pushes the rendered files to `gh-pages` branch.
+[Github Action](./.github/workflows/publish.yml) automatically renders and triggers Netlify publish.
 
 ## Method 2:
-Run - `quarto publish gh-pages` and quarto will publish the rendered site into the gh-pages branch.
+Run - `quarto publish netlify` and quarto will publish the rendered site to Netlify.
