@@ -1,4 +1,4 @@
-[![Netlify Status](https://api.netlify.com/api/v1/badges/28614791-1d2a-4912-9bc2-472df3e6f8e4/deploy-status)](https://app.netlify.com/sites/aniket-blog/deploys)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/28614791-1d2a-4912-9bc2-472df3e6f8e4/deploy-status)](https://app.netlify.com/sites/aniketmaurya/deploys)
 
 # How to publish?
 
