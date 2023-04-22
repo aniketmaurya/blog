@@ -5,7 +5,7 @@ badges: true
 categories:
 - rust
 - notes
-image: ../../profile.png
+image: /assets/blog.png
 date: '2022-11-29'
 keywords: programming, coding, rust
 layout: post
@@ -37,7 +37,7 @@ We can compare it with Python staticmethod `SomeClass.somemethod`, with `::` ins
 let s = String::from("hello");
 ```
 
-This string is mutable and to add more characters we can do the following - 
+This string is mutable and to add more characters we can do the following -
 ```rust
     s.push_str(", world!");
 ```
