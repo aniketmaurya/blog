@@ -1,4 +1,4 @@
-[![Netlify Status](https://api.netlify.com/api/v1/badges/28614791-1d2a-4912-9bc2-472df3e6f8e4/deploy-status)](https://app.netlify.com/sites/aniketmaurya/deploys)
+[![Quarto Publish](https://github.com/aniketmaurya/blog/actions/workflows/publish.yml/badge.svg)](https://github.com/aniketmaurya/blog/actions/workflows/publish.yml)
 
 # How to publish?
 
