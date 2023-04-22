@@ -6,13 +6,30 @@ website:
   title: "AI with Aniket"
   favicon: assets/favicon.ico
   repo-url: https://github.com/aniketmaurya/blog
+
   navbar:
-    right:
+    background: primary
+    search: true
+    left:
+      - text: "Home"
+        file: index.qmd
+      - pages/talks.qmd
       - about.qmd
+
+    right:
       - icon: github
         href: https://github.com/aniketmaurya
       - icon: twitter
         href: https://twitter.com/aniketmaurya
+
+  page-footer:
+    left: "Copyright 2023, Aniket Maurya"
+    right:
+      - icon: github
+        href: https://github.com/aniketmaurya
+      - icon: twitter
+        href: https://twitter.com/aniketmaurya
+
   image: profile.png
   twitter-card: true
   google-analytics: "G-QD11JWMMPF"
