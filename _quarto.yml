@@ -20,6 +20,6 @@ website:
 format:
   html:
     theme:
-      light: cosmo
+      light: default
       dark: darkly
     css: styles.css
