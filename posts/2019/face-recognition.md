@@ -1,18 +1,14 @@
 ---
-aliases:
-- /Face Recognition/Tensorflow/2019/01/07/face-recognition
-badges: true
-categories:
-- Tensorflow
-- Face Recognition
-date: '2019-01-07'
+title: Face Recognition
 description: Learn to create Face Recognition system from scratch
+date: '2019-01-07'
+
+categories:
+- Face Recognition
 image: https://cdn-images-1.medium.com/max/2000/1*t3DEmVOWOuWjIo_TjcpxNQ.gif
 keywords: face recognition, tensorflow, deep learning, python
 layout: post
-title: Face Recognition
 toc: true
-
 ---
 
 AI is revolutionizing the world. Face recognition is one such spectrum of it. Almost everyone uses face recognition systems — on our mobile, Facebook, Photo gallery apps or advanced security cameras. Learn how these systems are able to recognize our faces.
@@ -46,8 +42,6 @@ To get our embedding we feed the image into a pre-trained model then run a forwa
 ![Source: [Coursera](http://deeplearning.ai)](https://cdn-images-1.medium.com/max/3840/1*CKnxCH4SNOnTqctwX-ViKQ.png)*Source: [Coursera](http://deeplearning.ai)*
 
 
-
-
 $\|\|f(X1) — f(X2)\|\|²$ is the degree of similarity between image X1 and X2. If it’s smaller than a chosen threshold then both are the same person.
 
 If you’re wondering “what this $\|A\|$ weird symbol is?”, it’s called *Frobenius Norm*.
@@ -61,7 +55,7 @@ Training a Face recognition model is computationally expensive so it's recommend
 
 Start with creating a database of persons containing an embedding vector for each.
 
-```py
+```python
 #create a dictionary database
 db = dict()
 #encoding(image_path) converts image to embedding
@@ -119,4 +113,4 @@ def recognize_me(input_embedding):
 
 You can provide your feedback in comment section below.
 
-**Follow me on [Twitter](https://twitter.com/aniketmauryaTwitter)**
+**Follow me on [Twitter](https://twitter.com/aniketmaurya)**

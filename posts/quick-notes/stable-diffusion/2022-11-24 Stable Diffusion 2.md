@@ -3,8 +3,8 @@ title: 'What is new in Stable Diffusion 2.0?'
 description: "What is new in Stable Diffusion 2.0? It's trained with a brand new text encoder OpenCLIP and Depth-to-Image diffusion model."
 badges: true
 categories:
-- text-to-image
-- image generation
+  - text-to-image
+  - image generation
 image: sd2release.png
 date: '2022-11-24'
 keywords: image generation, stable diffusion, deep learning,

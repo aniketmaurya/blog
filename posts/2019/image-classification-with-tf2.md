@@ -1,21 +1,20 @@
 ---
+title: Image Classification with Tensorflow 2.x
+description: Image Classification with Tensorflow 2.x.
+date: '2019-05-12'
 aliases:
 - /Deep Learning/Tensorflow/2019/05/12/image-classification-with-tf2
 badges: true
 categories:
-- Tensorflow
-- Deep Learning
-date: '2019-05-12'
-description: Image Classification with Tensorflow 2.x.
-image: https://4.bp.blogspot.com/-mya0XZqrtJs/XoN9SufkS2I/AAAAAAAAC5w/y5POjjt0Rs8B8uLLO1gegGb74MYTx7W7gCLcBGAsYHQ/s1600/TF_FullColor_Icon.jpg
+  - Tensorflow
+  - Deep Learning
 keywords: tensorflow, deep learning, image classification
 layout: notebook
-title: Image Classification with Tensorflow 2.x
 toc: true
-
+image: https://4.bp.blogspot.com/-mya0XZqrtJs/XoN9SufkS2I/AAAAAAAAC5w/y5POjjt0Rs8B8uLLO1gegGb74MYTx7W7gCLcBGAsYHQ/s1600/TF_FullColor_Icon.jpg
 ---
 
-# Image Classification with TF 2
+## Image Classification with TF 2
 
 Unlike previous versions, TensorFlow 2.0 is coming out with some major changes. It is going to be more pythonic and no need to turn on eager execution explicitly. With tight integration of Keras now it will focus on simplicity and ease of use.
 
@@ -24,7 +23,7 @@ Unlike previous versions, TensorFlow 2.0 is coming out with some major changes. 
 
 ![TF-Logo](https://raw.githubusercontent.com/aniketmaurya/machine_learning/master/logo/tf-logo-rect.jpg)
 
-# Building a simple image classifier
+## Building a simple image classifier
 
 We will create a simple Neural Networks architecture for image classification. Fashion MNIST is a collection of 70,000 grayscale images of 28x28 pixel each, with 10 classes of different clothing items. We will train our Neural Network on this dataset.
 > CNN performs better than Dense NN for image classification both in terms of time and accuracy. I have used Dense NN architecture here for demonstration.
@@ -150,9 +149,9 @@ model = tf.keras.models.load_model("my_image_classifier")
 
 Now, it’s time to train different datasets on your own. Good Luck 😄!
 
-<hr>
-<br>
-# Recommended Resources
+---
+
+## Recommended Resources
 
 1. Deep learning specialization (Coursera)
 

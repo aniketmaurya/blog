@@ -8,7 +8,6 @@ listing:
   sort-ui: false
   filter-ui: false
   feed: true
-  max-items: 10
   image-placeholder: /assets/blog.png
   image-height: 200px
 page-layout: full
