@@ -1,5 +1,5 @@
 ---
-title: 'Guide to writing technical content in Machine Learning and AI'
+title: 'Guide to writing technical content'
 description: 'Learn how to write impactful technical content with SEO in mind'
 date: '2023-05-23'
 keywords: blog, writing
@@ -8,6 +8,8 @@ toc: false
 image: /posts/2023/images/how-to-write-blog.png
 
 ---
+
+This article presents guidelines to write an impactful content for organic growth and SEO.
 
 Crafting SEO-optimized technical content is not always a straightforward task. It requires presenting the article in a manner that is easily comprehensible for both English speakers and non-English speakers *(if the content is written in English)*.
 
@@ -23,7 +25,10 @@ None of my content would have been possible without the guidance of amazing peop
 ## Know before you write
 * **Introduction** should clearly describe what will the reader get out of the article.
 * Write down the objective for the blog and don't deviate from what you've promised.
-* The overall blog should be Skimmable - write descriptive and short headlines for each section of the blog
+
+* The blog title should be something that your audience will search online. For example - "*How to train LLMs under 16 GB GPU memory*" or "*How to write articles with SEO in mind*".
+
+* The overall blog should be Skimmable - write descriptive and short headlines for each section of the blog.
 * Double check language using Grammarly or ChatGPT.
 * Substance:
 	* No buzzword can increase the readers.
