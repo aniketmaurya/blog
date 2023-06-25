@@ -5,7 +5,7 @@ date: '2023-05-23'
 keywords: blog, writing
 layout: post
 toc: false
-image: /posts/2023/how-to-write-blog.png
+image: /posts/2023/images/how-to-write-blog.png
 
 ---
 
@@ -13,7 +13,7 @@ Writing a technical content that optimize for SEO is not always straightforward.
 
 **Who am I to talk about this?** My blog [How To Finetune GPT Like Large Language Models on a Custom Dataset](https://lightning.ai/pages/blog/how-to-finetune-gpt-like-large-language-models-on-a-custom-dataset/) was trending on [Hacker News](https://news.ycombinator.com/item?id=36068850) and as a developer advocate at Lightning AI, I have been publishing articles and blog posts on Machine Learning, AI and Large Language Models (LLMs) that boosted the overall web traffic and community engagement.
 
-![](/posts/2023/hn-trending.png)
+![](/posts/2023/images/hn-trending.png)
 
 ::: {.callout-note}
 None of my content would have been possible without the guidance of amazing people at Lightning AI and open source community!
