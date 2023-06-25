@@ -40,6 +40,6 @@ website:
 format:
   html:
     theme:
-      light: default
+      light: united
       dark: darkly
     css: styles.css
