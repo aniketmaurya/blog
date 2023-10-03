@@ -63,7 +63,7 @@ data = tf.data.Dataset.list_files(image_path_list)
 
 ```python
 def load_images(path):
-    
+
     image = tf.io.read_file(path)
     image = tf.io.decode_image(image)
     label = tf.strings.split(path, os.path.sep)[-2]
