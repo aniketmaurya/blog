@@ -1,5 +1,5 @@
 ---
-title: 'Training an Image Classification Model using PyTorch'
+title: 'Training an Image Classification Model using PyTorch Lightning'
 description: 'Learn how to train image classification model using PyTorch Lightning'
 date: '2023-10-14'
 keywords: pytorch, lightning
@@ -8,7 +8,7 @@ toc: true
 author: ChatGPT
 ---
 
-# Training an Image Classification Model using PyTorch
+# Training an Image Classification Model using PyTorch Lightning
 
 Image classification is one of the most fundamental tasks in computer vision and deep learning. It involves training a model to categorize images into predefined classes or labels. PyTorch, a popular deep learning framework, provides a robust platform for building and training image classification models. In this blog, we'll take you through the process of training an image classification model using PyTorch.
 
