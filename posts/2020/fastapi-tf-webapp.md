@@ -67,14 +67,14 @@ Let's create a function to assign a risk level based on the inputs.
 def get_risk_level(symptom: Symptom):
     if not (symptom.fever or symptom.dry_cough or symptom.tiredness or symptom.breathing_problem):
         return 'Low risk level. THIS IS A DEMO APP'
-    
+
     if not (symptom.breathing_problem or symptom.dry_cough):
         if symptom.fever:
             return 'moderate risk level. THIS IS A DEMO APP'
-    
+
     if symptom.breathing_problem:
         return 'High-risk level. THIS IS A DEMO APP'
-    
+
     return 'THIS IS A DEMO APP'
 
 ```
@@ -114,7 +114,7 @@ We resize the image to 224x224 and normalize the pixel values to be in **[-1, 1]
 ```python
 from tensorflow.keras.applications.imagenet_utils import decode_predictions
 ```
-`decode_predictions` is used to decode the class name of the predicted object. 
+`decode_predictions` is used to decode the class name of the predicted object.
 Here we will return the top-2 probable class.
 
 ```python
@@ -191,7 +191,7 @@ if __name__ == "__main__":
 
 ```
 
-> [FastAPI documentation](https://fastapi.tiangolo.com/) is the best place to learn more about core concepts of the framework. 
+> [FastAPI documentation](https://fastapi.tiangolo.com/) is the best place to learn more about core concepts of the framework.
 
 <hr>
 <br>

@@ -40,7 +40,7 @@ EfficientDet paper has mentioned its 7 family members.
 
 Conventional FPN (Feature Pyramid Network) is limited by the one-way information flow. [PANet](https://arxiv.org/pdf/1803.01534.pdf) added an extra bottom-up path for information flow. PANet achieved better accuracy but with the cost and more parameters and computations. The paper proposed several optimizations for cross-scale connections:
 
-1. Remove Nodes that only have one input edge. 
+1. Remove Nodes that only have one input edge.
 *If a node has only one input edge with no feature fusion, then it will have less contribution to the feature network that aims at fusing different features.*
 
 2. Add an extra edge from the original input to output node if they are at the same level, in order to fuse more features without adding much cost.
@@ -49,7 +49,7 @@ Conventional FPN (Feature Pyramid Network) is limited by the one-way information
 
 ## Weighted Feature Fusion
 
-While multi-scale fusion, input features are not simply summed up. The authors proposed to add additional weight for each input during feature fusion and let the network to learn the importance of each input feature. Out of three weighted fusion approaches — 
+While multi-scale fusion, input features are not simply summed up. The authors proposed to add additional weight for each input during feature fusion and let the network to learn the importance of each input feature. Out of three weighted fusion approaches —
 **Unbounded fusion:**
 
 ![Source: [https://arxiv.org/abs/1911.09070](https://arxiv.org/abs/1911.09070)](https://cdn-images-1.medium.com/max/2000/1*rv-MpuUiv-uVs5Trx4XI1Q.png)*Source: [https://arxiv.org/abs/1911.09070](https://arxiv.org/abs/1911.09070)*
