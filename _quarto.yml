@@ -3,7 +3,7 @@ project:
   output-dir: docs
 
 website:
-  title: "AI with Aniket"
+  title: "Aniket Maurya"
   favicon: assets/favicon.ico
   repo-url: https://github.com/aniketmaurya/blog
   site-url: https://aniketmaurya.com
@@ -14,8 +14,8 @@ website:
     left:
       - text: "Home"
         file: index.qmd
-      - pages/talks.qmd
       - about.qmd
+      - pages/talks.qmd
 
     right:
       - icon: github
