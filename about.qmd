@@ -3,6 +3,7 @@ title: "About"
 image: https://avatars.githubusercontent.com/u/21018714?s=400&u=b47cb5eb401714a0e38aa8d32ec7031e5c30e346&v=4
 about:
   template: solana
+  image-shape: round
   links:
     - icon: twitter
       text: Twitter
@@ -18,22 +19,26 @@ about:
       href: https://youtube.com/@aiwithaniket
 
 ---
-Hi there! I am Aniket, currently working at Lightning AI as a developer advocate. I have experience in building open-source projects and deploying models in production at scale. I have built [Gradsflow](https://docs.gradsflow.com/) and [Chitra](https://github.com/aniketmaurya/chitra), both open-source machine learning and AI tools.
+Hi there! I'm Aniket, a self-taught **Machine Learning Engineer** with a major in Computer Science.
+Currently, I'm working on open-source projects at **Lightning AI** as a **Developer Advocate**.
+I have experience in building and deploying machine learning systems at scale for Blibli, an e-commerce giant.
+I enjoy tinkering with open-source tools and have created [Gradsflow](https://docs.gradsflow.com/) and [Chitra](https://github.com/aniketmaurya/chitra), 
+both open-source machine learning and AI tools designed to assist developers in solving ML problems more efficiently.
 
 ## DevRel Experience
 
-I joined Lightning AI (formerly PyTorch Lightning) after being a community contributor and core maintainer of [Lightning Flash](https://lightning-flash.readthedocs.io/en/latest/governance.html). I made significant contributions since the first day of the launch of the library and hosted meetups and workshops to educate developers.
+I joined Lightning AI (formerly PyTorch Lightning) after being a community contributor and core maintainer of [Lightning Flash](https://lightning-flash.readthedocs.io/en/latest/governance.html). I made significant contributions from the library's launch day and hosted meetups and workshops to educate developers.
 
-I have been working on building community, technical content creation, and using my engineering skills to build flagship products. Some of my achievements here are -
+I have been working on building the community, creating technical content, and using my engineering skills to build flagship products. Some of my achievements here are:
 
-- Grew the London community by hosting in-person [meetups](https://www.meetup.com/london-deep-learning-by-lightning-ai/) from 30 to 300.
+- Grew the London community by 10x and hosted multiple in-person community [meetups](https://www.meetup.com/london-deep-learning-by-lightning-ai/).
 - Created high-quality content that drove the majority of the traffic to the [Lightning.ai](http://Lightning.ai) website. My blog was trending on [HackerNews](https://news.ycombinator.com/item?id=36068850) as well.
-- Live-streamed about LLMs and distributed model training on our brand Discord channel and grew the community to more than 1K.
-- Handled [Twitter](https://twitter.com/lightningAI/) and LinkedIn for posting technical content and driving engagements with the developer community.
+- Live-streamed about LLMs and distributed model training on our brand Discord channel, growing the community to more than 1K.
+- Managed [Twitter](https://twitter.com/lightningAI/) and LinkedIn for posting technical content and driving engagements with the developer community.
 
 ## Engineering Experience
 
-Before being a devrel, I was a Machine Learning engineer (I still consider myself an AI engineer) at a startup where I worked on training and deploying models in production. I scaled ML services to a millions of requests per hour with a messaging queue, automatic batching, and several other optimizations. My open-source project (Chitra) is being used in production.
+Before becoming a devrel, I was a Machine Learning engineer (I still consider myself an AI engineer) at a startup where I worked on training and deploying models in production. I scaled ML services to millions of requests per hour with a messaging queue, automatic batching, and several other optimizations. My open-source project (Chitra) is being used in production.
 
 Recently, I have been contributing to [Lit-GPT](https://github.com/Lightning-AI/lit-gpt) (an open-source LLM training and finetuning library). I have implemented the LLM evaluation framework LM-Eval Harness and HELM (Stanford’s evaluation framework) for better evaluation of LLMs.
 
