@@ -33,8 +33,8 @@ I have been working on building community, technical content creation, and using
 
 ## Engineering Experience
 
-Before being a devrel, I was a Machine Learning engineer (I still consider myself an AI engineer) at a startup where I worked on training and deploying models in production. I scaled ML services to a million requests per day with a messaging queue, automatic batching, and several other optimizations. My open-source project (Chitra) is being used in production at the company.
+Before being a devrel, I was a Machine Learning engineer (I still consider myself an AI engineer) at a startup where I worked on training and deploying models in production. I scaled ML services to a millions of requests per hour with a messaging queue, automatic batching, and several other optimizations. My open-source project (Chitra) is being used in production.
 
-Here at Lightning AI, I contribute to [Lit-GPT](https://github.com/Lightning-AI/lit-gpt) (an open-source LLM training and finetuning library). I have implemented the LLM evaluation framework LM-Eval Harness and HELM (Stanford’s evaluation framework) for better evaluation of LLMs.
+Recently, I have been contributing to [Lit-GPT](https://github.com/Lightning-AI/lit-gpt) (an open-source LLM training and finetuning library). I have implemented the LLM evaluation framework LM-Eval Harness and HELM (Stanford’s evaluation framework) for better evaluation of LLMs.
 
 I built the flagship product for Lightning AI, [Muse](https://github.com/Lightning-Universe/stable-diffusion-deploy), where I deployed stable diffusion and scaled it to 1K+ concurrency.
