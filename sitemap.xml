@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+<!-- created with Free Online Sitemap Generator www.xml-sitemaps.com -->
+
+
+<url>
+  <loc>https://aniketmaurya.com/</loc>
+  <lastmod>2023-11-01T19:33:17+00:00</lastmod>
+  <priority>1.00</priority>
+</url>
+<url>
+  <loc>https://aniketmaurya.com/index.html</loc>
+  <lastmod>2023-11-01T19:33:17+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://aniketmaurya.com/pages/talks.html</loc>
+  <lastmod>2023-11-01T19:33:17+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://aniketmaurya.com/about.html</loc>
+  <lastmod>2023-11-01T19:33:17+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://aniketmaurya.com/posts/2023/image-classification-pytorch.html</loc>
+  <lastmod>2023-11-01T19:33:17+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://aniketmaurya.com/posts/2023/image-classification-pytorch-lightning.html</loc>
+  <lastmod>2023-11-01T19:33:17+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://aniketmaurya.com/posts/2023/how-to-write-blog.html</loc>
+  <lastmod>2023-11-01T19:33:17+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://aniketmaurya.com/posts/learning-rust/2022-11-29-learning-rust.html</loc>
+  <lastmod>2023-11-01T19:33:17+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://aniketmaurya.com/posts/quick-notes/stable-diffusion/2022-11-24%20Stable%20Diffusion%202.html</loc>
+  <lastmod>2023-11-01T19:33:17+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://aniketmaurya.com/posts/2022/TorchData.html</loc>
+  <lastmod>2023-11-01T19:33:17+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://aniketmaurya.com/posts/2022/happywhale-pytorch-training-from-scratch-lite.html</loc>
+  <lastmod>2023-11-01T19:33:17+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://aniketmaurya.com/posts/2021/2021-02-13-pix2pix%20explained%20with%20code.html</loc>
+  <lastmod>2023-11-01T19:33:17+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://aniketmaurya.com/posts/2020/2020-11-16-dcgan.html</loc>
+  <lastmod>2023-11-01T19:33:17+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://aniketmaurya.com/posts/2020/deploy-python-heroku.html</loc>
+  <lastmod>2023-11-01T19:33:17+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://aniketmaurya.com/posts/2020/fastapi-tf-webapp.html</loc>
+  <lastmod>2023-11-01T19:33:17+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://aniketmaurya.com/posts/2020/Probability-vs-Likelihood.html</loc>
+  <lastmod>2023-11-01T19:33:17+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://aniketmaurya.com/posts/2020/Normalization.html</loc>
+  <lastmod>2023-11-01T19:33:17+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://aniketmaurya.com/posts/2020/tf.data-Creating-Data-Input-Pipelines.html</loc>
+  <lastmod>2023-11-01T19:33:17+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://aniketmaurya.com/posts/2020/2020-03-27-linear%20regression%20scratch.html</loc>
+  <lastmod>2023-11-01T19:33:17+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://aniketmaurya.com/posts/2020/EfficientDet.html</loc>
+  <lastmod>2023-11-01T19:33:17+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://aniketmaurya.com/posts/2019/image-classification-with-tf2.html</loc>
+  <lastmod>2023-11-01T19:33:17+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://aniketmaurya.com/posts/2019/face-recognition.html</loc>
+  <lastmod>2023-11-01T19:33:17+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+
+
+</urlset>
