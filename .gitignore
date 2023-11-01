@@ -19,3 +19,4 @@ _site/
 /_site/
 *.nojekyll
 docs/
+.idea/
