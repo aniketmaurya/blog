@@ -15,6 +15,8 @@ website:
       - text: "Home"
         file: index.qmd
       - about.qmd
+      - text: "Projects"
+        file: pages/projects.qmd
       - pages/talks.qmd
 
     right:
