@@ -1,0 +1,41 @@
+---
+title: 'Master PyTorch Lightning'
+description: 'Zero-to-Hero: PyTorch Lightning. A learning path for PyTorch Lightning to efficiently train large models'
+date: '2023-11-02'
+keywords: pytorch, lightning
+layout: post
+toc: true
+image: /posts/2023/images/pl_get_started.png
+---
+
+# Zero-to-Hero: Master PyTorch Lightning
+
+
+```{mermaid}
+%%| fig-align: center
+flowchart TD
+  A[Learn PyTorch] --> B[Learn writing training loop]
+  B --> C[Learn PyTorch Lightning]
+  C --> D[Learn learning rate finder]
+  D --> E[Learn callbacks]
+  E --> F[Learn loggers]
+  F --> G[Learn mixed precision]
+  G --> H[Learn distributed training]
+
+```
+
+## Prerequisites
+
+Before we start, make sure you have the following prerequisites:
+
+- **Python:** Ensure you have Python installed on your system.
+- **PyTorch:** Install PyTorch as specified on the [official PyTorch website](https://pytorch.org/).
+- **PyTorch Lightning:** Install PyTorch Lightning using pip:
+
+```bash
+pip install pytorch-lightning
+```
+
+- **GPU (optional):** While not mandatory, using a GPU can significantly speed up training, especially for larger models and datasets.
+
+THIS BLOG IS STILL IN PROGRESS.

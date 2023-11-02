@@ -45,3 +45,6 @@ format:
       light: united
       dark: darkly
     css: styles.css
+    mermaid:
+      theme: dark
+

@@ -6,6 +6,7 @@ keywords: pytorch
 layout: post
 toc: true
 author: ChatGPT
+image: https://pytorch.org/tutorials/_static/img/thumbnails/cropped/profiler.png
 ---
 
 # Training an Image Classification Model using PyTorch

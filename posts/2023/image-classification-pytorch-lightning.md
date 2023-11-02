@@ -6,6 +6,7 @@ keywords: pytorch, lightning
 layout: post
 toc: true
 author: ChatGPT
+image: https://repository-images.githubusercontent.com/178626720/7eaddebb-17d3-4a19-8fc8-55f2ad6d456a
 ---
 
 # Training an Image Classification Model Using PyTorch Lightning
