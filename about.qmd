@@ -10,7 +10,7 @@ about:
       href: https://twitter.com/aniketmaurya
     - icon: linkedin
       text: LinkedIn
-      href: https://linkedin.com/aniketmaurya
+      href: https://linkedin.com/in/aniketmaurya
     - icon: github
       text: Github
       href: https://github.com/aniketmaurya
@@ -19,11 +19,15 @@ about:
       href: https://youtube.com/@aiwithaniket
 
 ---
-Hi there! I'm Aniket, a self-taught **Machine Learning Engineer** with a major in Computer Science.
-Currently, I'm working on open-source projects at **Lightning AI** as a **Developer Advocate**.
-I have experience in building and deploying machine learning systems at scale for Blibli, an e-commerce giant.
-I enjoy tinkering with open-source tools and have created [Gradsflow](https://docs.gradsflow.com/) and [Chitra](https://github.com/aniketmaurya/chitra), 
-both open-source machine learning and AI tools designed to assist developers in solving ML problems more efficiently.
+Hi there! I'm Aniket, a self-taught **Machine Learning Engineer** with a background in Computer Science & Engineering.
+<br>Currently, I'm working on open-source projects at **Lightning AI** as a **Developer Advocate**.
+
+You can find most of my new blogs on LLMs, Distributed Training, and Machine Learning on [Lightning AI's blog](https://lightning.ai/pages/author/aniket-maurya/).
+
+I enjoy building and deploying **machine learning systems at scale**.
+In the past, I've created computer vision and NLP-based systems that automated significant portions of business operations for a major e-commerce company.
+<br>I also enjoy tinkering with open-source tools and have both created and currently maintain several open-source projects,
+including [Gradsflow](https://docs.gradsflow.com) and [Lit-GPT](https://github.com/Lightning-AI/lit-gpt).
 
 ## DevRel Experience
 
@@ -38,8 +42,13 @@ I have been working on building the community, creating technical content, and u
 
 ## Engineering Experience
 
-Before becoming a devrel, I was a Machine Learning engineer (I still consider myself an AI engineer) at a startup where I worked on training and deploying models in production. I scaled ML services to millions of requests per hour with a messaging queue, automatic batching, and several other optimizations. My open-source project (Chitra) is being used in production.
+Before a DevRel, I am a Machine Learning engineer. I have worked with startups to build and deploy machine learning systems in production.
+I successfully scaled ML services to handle millions of requests per hour by implementing a messaging queue, automatic batching, and various other optimizations.
+My open-source project, [Chitra](https://github.com/aniketmaurya/chitra), is actively used in production environments.
 
-Recently, I have been contributing to [Lit-GPT](https://github.com/Lightning-AI/lit-gpt) (an open-source LLM training and finetuning library). I have implemented the LLM evaluation framework LM-Eval Harness and HELM (Stanford’s evaluation framework) for better evaluation of LLMs.
+I spearheaded the development of Lightning AI's flagship product, [Muse](https://github.com/Lightning-Universe/stable-diffusion-deploy).
+I was responsible for deploying stable diffusion and scaling it to support 1K+ concurrent users.
 
-I built the flagship product for Lightning AI, [Muse](https://github.com/Lightning-Universe/stable-diffusion-deploy), where I deployed stable diffusion and scaled it to 1K+ concurrency.
+Recently, my work has focused on **distributed training of LLMs and deployment**.
+I contribute to [Lit-GPT](https://github.com/Lightning-AI/lit-gpt), an open-source LLM training and finetuning library developed by Lightning AI.
+Additionally, I integrated the LLM evaluation framework LM-Eval Harness and [HELM](https://github.com/stanford-crfm/helm) (Stanford’s evaluation framework) to enhance the evaluation of LLMs.

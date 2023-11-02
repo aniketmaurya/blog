@@ -1,10 +1,18 @@
 ---
 title: Talks
 ---
+### 2023-10-24: Generative AI World Summit
 
-### 2023-03-25
+Finetuning a Large Language Model with custom dataset on consumer GPUs
 
-The Real AI Podcast #1: Lightning 2.0 and Open Source Machine Learning
+![](/pages/talks/2023-10-24-mlops-summit.png){width="426" height="240"}
+
+---
+
+
+### 2023-03-25: The Real AI Podcast #1
+
+Lightning 2.0 and Open Source Machine Learning
 
 {{< video https://youtu.be/6CTPmYugI-k
     title="Aniket Maurya: Lightning 2.0 and Open Source Machine Learning | The Real AI Podcast #1"
@@ -13,9 +21,8 @@ The Real AI Podcast #1: Lightning 2.0 and Open Source Machine Learning
 
 ---
 
-### 2023-04-18
-
-IIT Guwahati MLRW-23 | Scaling PyTorch Code with Fabric, PyTorch Lightning and Lit-LLaMA
+### 2023-04-18: IIT Guwahati MLRW-23
+Scaling PyTorch Code with Fabric, PyTorch Lightning and Lit-LLaMA
 
 {{< video https://youtu.be/rr674_lq5lY
     title="MLRW-23 | Scaling PyTorch Code with Fabric, PyTorch Lightning and Lit-LLaMA"
@@ -24,9 +31,9 @@ IIT Guwahati MLRW-23 | Scaling PyTorch Code with Fabric, PyTorch Lightning and L
 
 ---
 
-### 2023-02-03
+### 2023-02-03: Code walkthrough with Josh Starmer (CEO StatQuest)
 
-Code walkthrough with Josh Starmer (CEO StatQuest): Building ML Pipelines Like Legos with Scikit-Learn and Lightning AI
+Building ML Pipelines Like Legos with Scikit-Learn and Lightning AI
 
 {{< video  https://youtu.be/4iLUKE3TazY
     title="Building ML Pipelines Like Legos with Scikit-Learn and Lightning AI"
