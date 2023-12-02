@@ -2,6 +2,23 @@
 title: Projects
 ---
 
+### FastServe
+[Repo](https://github.com/aniketmaurya/fastserve)
+
+Machine Learning Serving focused on GenAI with simplicity as the top priority.
+Dynamic batching powered by pure Python implementation.
+
+**To serve Image-to-Text API using SSD-1B:**
+
+```python
+from fastserve.models import FastServeSSD
+
+serve = FastServeSSD(device="cuda", batch_size=4, timeout=1)
+serve.run_server()
+```
+
+---
+
 ### Discord LLM Bot
 [Repo](https://github.com/aniketmaurya/discord-llm-bot)
 
