@@ -19,6 +19,16 @@ serve.run_server()
 
 ---
 
+### Muse (Stable Diffusion Deployment)
+[Repo](https://github.com/Lightning-Universe/stable-diffusion-deploy)
+
+Open source, stable-diffusion production server to show how to deploy diffusion models in a real production environment with: load-balancing, gpu-inference, performance-testing, micro-services orchestration and more. All handled easily with the Lightning Apps framework.
+
+
+![Muse](https://user-images.githubusercontent.com/3640001/195984024-788255e7-d01b-4522-9655-2a3ba56e80aa.png)
+
+---
+
 ### Discord LLM Bot
 [Repo](https://github.com/aniketmaurya/discord-llm-bot)
 
