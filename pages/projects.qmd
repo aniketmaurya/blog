@@ -9,14 +9,7 @@ Retrieval Augmented Genration (RAG) powered Discord Bot that works seamlessly on
 This Discord bot is designed to helps answer questions based on a knowledge base (vector db).
 
 
-```mermaid
-graph LR
-    A((User Query)) --> B((Convert to Embedding))
-    B --> C((Find Similar Document<br>from Vector Database))
-    C --> D((Use Retrieved Document<br>as Context to Answer Question<br>using Mistral 7B LLM))
-```
-
-![](https://github.com/aniketmaurya/discord-llm-bot/blob/main/assets/discord-bot.png){height="420"}
+![](https://raw.githubusercontent.com/aniketmaurya/discord-llm-bot/main/assets/discord-bot.png){height="420"}
 
 ---
 
