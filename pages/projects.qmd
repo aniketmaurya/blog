@@ -82,4 +82,3 @@ An open-source AutoML Library based on PyTorch
 A multi-functional library for full-stack Deep Learning. Simplifies Model Building, API development, and Model Deployment.
 
 ![](https://ik.imagekit.io/aniket/chitra/chitra-arch_Vw9AdA4aC.svg){height="420"}
-

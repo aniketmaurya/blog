@@ -11,7 +11,7 @@ image: https://pytorch.org/tutorials/_static/img/thumbnails/cropped/profiler.png
 
 # Training an Image Classification Model using PyTorch
 
-Image classification is one of the most fundamental tasks in computer vision and deep learning. It involves training a model to categorize images into predefined classes or labels. PyTorch, a popular deep learning framework, provides a robust platform for building and training image classification models. In this blog, we'll take you through the process of training an image classification model using PyTorch. 
+Image classification is one of the most fundamental tasks in computer vision and deep learning. It involves training a model to categorize images into predefined classes or labels. PyTorch, a popular deep learning framework, provides a robust platform for building and training image classification models. In this blog, we'll take you through the process of training an image classification model using PyTorch.
 
 ## Prerequisites
 
@@ -61,7 +61,7 @@ class Net(nn.Module):
         self.fc1 = nn.Linear(16 * 5 * 5, 120)
         self.fc2 = nn.Linear(120, 84)
         self.fc3 = nn.Linear(84, 10)
-        
+
     def forward(self, x):
         x = self.pool(F.relu(self.conv1(x)))
         x = self.pool(F.relu(self.conv2(x)))
