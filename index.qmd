@@ -13,11 +13,7 @@ listing:
 page-layout: full
 title-block-banner: true
 ---
-Hi there! I'm Aniket, a **Machine Learning - Software Engineer** with a background in Computer Science & Engineering.
+Hi there! I'm Aniket, a **Machine Learning - Software Engineer** with with over 4 years of experience, demonstrating a strong track record in developing and deploying machine learning models to production.
 
-Currently, I'm working on building LLM powered products and open-source at **Lightning AI ⚡️**
-
-
-You can find most of my new blogs on LLMs, Distributed Training, and Machine Learning on [Lightning AI's blog](https://lightning.ai/pages/author/aniket-maurya/).
-
+Read more about me [here](/about.html).
 <br>
