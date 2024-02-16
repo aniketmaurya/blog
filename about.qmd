@@ -19,20 +19,21 @@ about:
       href: https://youtube.com/@aiwithaniket
 
 ---
-Hi there! I'm Aniket, a **Machine Learning - Software Engineer** with a background in Computer Science & Engineering.
+Hi there! I'm Aniket, a **Machine Learning - Software Engineer** with with over 4 years of experience, demonstrating a strong track record in developing and deploying machine learning models to production.
 
-Currently, I'm working on building LLM powered products and open-source at **Lightning AI ⚡️**
+Currently, I'm working on building LLM-powered products and contributing to open source at Lightning AI ⚡️.
 
-I am a machine learning engineer with over four years of experience. I have a strong track record of success in developing and deploying machine learning models to production.
 
-At Lightning AI, I had the chance to work on a wide range of AI products and use-cases as well as lead the open-source community. Some of my contributions are:
+At Lightning AI, I have been working on on a wide range of AI products and use-cases as well as lead the open-source community.
+Some of my contributions include:
 
 * Designed and developed the flagship image generation product using Stable Diffusion, [Muse](https://lightning.ai/pages/community/tutorial/deploy-diffusion-models/).
 * Increased model serving throughput efficiency by more than *50%* by implementing dynamic batching. 
 * Designed and developed *[Chat with PDF](https://lightning.ai/lightning-ai/studios/document-chat-assistant-using-rag)*, a RAG application using Large Language Models (LLMs). 
 * Enabled LLM evaluation by integrating Eval-Harness framework and Stanford's HELM with [Lit-GPT](https://github.com/Lightning-AI/lit-gpt).
 
-Before Lightning AI, I was at [Quinbay](https://www.linkedin.com/company/quinbay/), an startup based in Bangalore where I built and deployed deep learning models in production for our partner Blibli.com.
+
+Before joining Lightning AI, I was at [Quinbay](https://www.linkedin.com/company/quinbay/), a startup based in Bangalore, where I built and deployed deep learning models in production for our partner Blibli.com.
 
 * Built and deployed Image Recognition system to block objectionable content, scaled for 10M requests.
 * Reduced the Merchant Onboarding time from 24 hours to 1 second with a real-time ID Card Verification & Autofill System.
