@@ -42,7 +42,7 @@ website:
 format:
   html:
     theme:
-      light: united
+      light: journal
       dark: darkly
     css: styles.css
     mermaid:

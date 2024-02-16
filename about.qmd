@@ -19,36 +19,24 @@ about:
       href: https://youtube.com/@aiwithaniket
 
 ---
-Hi there! I'm Aniket, a self-taught **Machine Learning Engineer** with a background in Computer Science & Engineering.
-<br>Currently, I'm working on open-source projects at **Lightning AI** as a **Developer Advocate**.
+Hi there! I'm Aniket, a **Machine Learning - Software Engineer** with a background in Computer Science & Engineering.
+
+Currently, I'm working on building LLM powered products and open-source at **Lightning AI ⚡️**
+
+I am a machine learning engineer with over four years of experience. I have a strong track record of success in developing and deploying machine learning models to production.
+
+At Lightning AI, I had the chance to work on a wide range of AI products and use-cases as well as lead the open-source community. Some of my contributions are:
+
+* Designed and developed the flagship image generation product using Stable Diffusion, [Muse](https://lightning.ai/pages/community/tutorial/deploy-diffusion-models/).
+* Increased model serving throughput efficiency by more than *50%* by implementing dynamic batching. 
+* Designed and developed *[Chat with PDF](https://lightning.ai/lightning-ai/studios/document-chat-assistant-using-rag)*, a RAG application using Large Language Models (LLMs). 
+* Enabled LLM evaluation by integrating Eval-Harness framework and Stanford's HELM with [Lit-GPT](https://github.com/Lightning-AI/lit-gpt).
+
+Before Lightning AI, I was at [Quinbay](https://www.linkedin.com/company/quinbay/), an startup based in Bangalore where I built and deployed deep learning models in production for our partner Blibli.com.
+
+* Built and deployed Image Recognition system to block objectionable content, scaled for 10M requests.
+* Reduced the Merchant Onboarding time from 24 hours to 1 second with a real-time ID Card Verification & Autofill System.
+* Introduced a Face Recognition System for fraud detection in the e-commerce wallet, which reduced the manual process by more than 50%.
+
 
 You can find most of my new blogs on LLMs, Distributed Training, and Machine Learning on [Lightning AI's blog](https://lightning.ai/pages/author/aniket-maurya/).
-
-I enjoy building and deploying **machine learning systems at scale**.
-In the past, I've created computer vision and NLP-based systems that automated significant portions of business operations for a major e-commerce company.
-<br>I also enjoy tinkering with open-source tools and have both created and currently maintain several open-source projects,
-including [Gradsflow](https://docs.gradsflow.com) and [Lit-GPT](https://github.com/Lightning-AI/lit-gpt).
-
-## DevRel Experience
-
-I joined Lightning AI (formerly PyTorch Lightning) after being a community contributor and core maintainer of [Lightning Flash](https://lightning-flash.readthedocs.io/en/latest/governance.html). I made significant contributions from the library's launch day and hosted meetups and workshops to educate developers.
-
-I have been working on building the community, creating technical content, and using my engineering skills to build flagship products. Some of my achievements here are:
-
-- Grew the London community by 10x and hosted multiple in-person community [meetups](https://www.meetup.com/london-deep-learning-by-lightning-ai/).
-- Created high-quality content that drove the majority of the traffic to the [Lightning.ai](http://Lightning.ai) website. My blog was trending on [HackerNews](https://news.ycombinator.com/item?id=36068850) as well.
-- Live-streamed about LLMs and distributed model training on our brand Discord channel, growing the community to more than 1K.
-- Managed [Twitter](https://twitter.com/lightningAI/) and LinkedIn for posting technical content and driving engagements with the developer community.
-
-## Engineering Experience
-
-Before a DevRel, I am a Machine Learning engineer. I have worked with startups to build and deploy machine learning systems in production.
-I successfully scaled ML services to handle millions of requests per hour by implementing a messaging queue, automatic batching, and various other optimizations.
-My open-source project, [Chitra](https://github.com/aniketmaurya/chitra), is actively used in production environments.
-
-I spearheaded the development of Lightning AI's flagship product, [Muse](https://github.com/Lightning-Universe/stable-diffusion-deploy).
-I was responsible for deploying stable diffusion and scaling it to support 1K+ concurrent users.
-
-Recently, my work has focused on **distributed training of LLMs and deployment**.
-I contribute to [Lit-GPT](https://github.com/Lightning-AI/lit-gpt), an open-source LLM training and finetuning library developed by Lightning AI.
-Additionally, I integrated the LLM evaluation framework LM-Eval Harness and [HELM](https://github.com/stanford-crfm/helm) (Stanford’s evaluation framework) to enhance the evaluation of LLMs.
