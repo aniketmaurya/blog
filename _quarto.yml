@@ -26,7 +26,7 @@ website:
         href: https://twitter.com/aniketmaurya
 
   page-footer:
-    left: "Copyright 2023, Aniket Maurya"
+    left: "Copyright 2024, Aniket Maurya"
     right:
       - icon: github
         href: https://github.com/aniketmaurya
@@ -43,7 +43,7 @@ format:
   html:
     theme:
       light: journal
-      dark: darkly
+      dark: [journal, theme-dark.scss]
     css: styles.css
     mermaid:
       theme: dark
