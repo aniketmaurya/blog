@@ -5,7 +5,12 @@ title: Talks
 
 Finetuning a Large Language Model with custom dataset on consumer GPUs
 
-![](/pages/talks/2023-10-24-mlops-summit.png){width="426" height="240"}
+{{< video https://youtu.be/OsD0KkyYXoY
+    title="Finetuning a Large Language Model with custom dataset on consumer GPUs"
+    width="426" height="240"
+>}}
+
+https://youtu.be/OsD0KkyYXoY
 
 ---
 
