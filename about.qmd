@@ -28,8 +28,8 @@ At Lightning AI, I have been working on on a wide range of AI products and use-c
 Some of my contributions include:
 
 * Designed and developed the flagship image generation product using Stable Diffusion, [Muse](https://lightning.ai/pages/community/tutorial/deploy-diffusion-models/).
-* Increased model serving throughput efficiency by more than *50%* by implementing dynamic batching. 
-* Designed and developed *[Chat with PDF](https://lightning.ai/lightning-ai/studios/document-chat-assistant-using-rag)*, a RAG application using Large Language Models (LLMs). 
+* Increased model serving throughput efficiency by more than *50%* by implementing dynamic batching.
+* Designed and developed *[Chat with PDF](https://lightning.ai/lightning-ai/studios/document-chat-assistant-using-rag)*, a RAG application using Large Language Models (LLMs).
 * Enabled LLM evaluation by integrating Eval-Harness framework and Stanford's HELM with [Lit-GPT](https://github.com/Lightning-AI/lit-gpt).
 
 

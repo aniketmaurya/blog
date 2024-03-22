@@ -13,7 +13,7 @@ hero:
     - theme: alt
       text: API Examples
       link: /api-examples
-  
+
   image:
     src: https://avatars.githubusercontent.com/u/21018714?s=400&u=b47cb5eb401714a0e38aa8d32ec7031e5c30e346&v=4
     alt: gradient

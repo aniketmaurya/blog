@@ -14,7 +14,7 @@ toc: false
 # Database management system
 
 Before DBMS came into pictures we were using file storage system as database which had some fundamental flaws:
-* Inconsistency 
+* Inconsistency
 * Difficult access
 * Security issue
 * Lack of concurrent access

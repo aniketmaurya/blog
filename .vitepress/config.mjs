@@ -15,14 +15,14 @@ export default defineConfig({
       {
         text: 'Posts',
         items: [
-          { 
+          {
             text: '2019',
             items: [
               { text: 'Face recognition', link: '/posts/2019/face-recognition' },
               { text: 'Image classification with TF2', link: '/posts/2019/image-classification-with-tf2' },
             ]
           },
-          { 
+          {
             text: '2020',
             items: [
               { text: 'TF.Data: Build data Pipelines', link: '/posts/2020/tf.data-Creating-Data-Input-Pipelines' },
