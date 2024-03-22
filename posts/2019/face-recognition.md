@@ -1,5 +1,5 @@
 ---
-outline: number
+outline: deep
 
 # title: Face Recognition
 # description: Learn to create Face Recognition system from scratch
