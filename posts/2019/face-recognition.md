@@ -1,21 +1,27 @@
 ---
-title: Face Recognition
-description: Learn to create Face Recognition system from scratch
-date: '2019-01-07'
+outline: number
 
-categories:
-- Face Recognition
-image: https://cdn-images-1.medium.com/max/2000/1*t3DEmVOWOuWjIo_TjcpxNQ.gif
-keywords: face recognition, tensorflow, deep learning, python
-layout: post
-toc: true
+# title: Face Recognition
+# description: Learn to create Face Recognition system from scratch
+# date: '2019-01-07'
+
+# categories:
+# - Face Recognition
+# image: https://cdn-images-1.medium.com/max/2000/1*t3DEmVOWOuWjIo_TjcpxNQ.gif
+# keywords: face recognition, tensorflow, deep learning, python
+# layout: post
+# toc: true
 ---
+# Building a Face Recognition System
+
+![](https://cdn.pixabay.com/photo/2021/01/24/23/13/man-5946820_1280.jpg)
+
 
 AI is revolutionizing the world. Face recognition is one such spectrum of it. Almost everyone uses face recognition systems — on our mobile, Facebook, Photo gallery apps or advanced security cameras. Learn how these systems are able to recognize our faces.
 
+
 *This article is inspired by the deeplearning.ai course on FaceNet.*
 
-![](https://cdn-images-1.medium.com/max/2000/1*t3DEmVOWOuWjIo_TjcpxNQ.gif)
 
 ## Face Verification vs. Face Recognition
 

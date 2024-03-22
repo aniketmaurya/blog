@@ -1,4 +1,4 @@
----
+<!-- ---
 aliases:
 - /Tensorflow/2020/04/08/tf.data-Creating-Data-Input-Pipelines
 badges: true
@@ -11,8 +11,9 @@ keywords: Tensorflow, Programming, Python
 layout: post
 title: 'tf.data: Creating data input pipelines'
 toc: true
+--- -->
 
----
+# TF Data: Creating data input pipelines
 
 Are you not able to load your NumPy data into memory?
 Does your model have to wait for data to be loaded after each epoch?
