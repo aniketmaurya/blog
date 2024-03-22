@@ -1,27 +1,29 @@
 ---
-title: Image Classification with Tensorflow 2.x
-description: Image Classification with Tensorflow 2.x.
-date: '2019-05-12'
-aliases:
-- /Deep Learning/Tensorflow/2019/05/12/image-classification-with-tf2
-badges: true
-categories:
-  - Tensorflow
-  - Deep Learning
-keywords: tensorflow, deep learning, image classification
-layout: notebook
-toc: true
-image: https://4.bp.blogspot.com/-mya0XZqrtJs/XoN9SufkS2I/AAAAAAAAC5w/y5POjjt0Rs8B8uLLO1gegGb74MYTx7W7gCLcBGAsYHQ/s1600/TF_FullColor_Icon.jpg
+# title: Image Classification with Tensorflow 2.x
+# description: Image Classification with Tensorflow 2.x.
+# date: '2019-05-12'
+# aliases:
+# - /Deep Learning/Tensorflow/2019/05/12/image-classification-with-tf2
+# badges: true
+# categories:
+#   - Tensorflow
+#   - Deep Learning
+# keywords: tensorflow, deep learning, image classification
+# layout: notebook
+# toc: true
+# image: https://4.bp.blogspot.com/-mya0XZqrtJs/XoN9SufkS2I/AAAAAAAAC5w/y5POjjt0Rs8B8uLLO1gegGb74MYTx7W7gCLcBGAsYHQ/s1600/TF_FullColor_Icon.jpg
 ---
 
-## Image Classification with TF 2
+# Image Classification with Tensorflow 2.x
+
+![TF-Logo](https://raw.githubusercontent.com/aniketmaurya/machine_learning/master/logo/tf-logo-rect.jpg)
+
 
 Unlike previous versions, TensorFlow 2.0 is coming out with some major changes. It is going to be more pythonic and no need to turn on eager execution explicitly. With tight integration of Keras now it will focus on simplicity and ease of use.
 
 [Keras](https://keras.io) is a high-level API that allows to easily build, train, evaluate and execute all sorts of neural networks. Keras was developed by François Chollet and open-sourced in March 2015. With its simplicity and easy-to-use feature, it gained popularity very quickly. Tensorflow comes with its own implementation of Keras with some TF specific features.
 > Keras can run on top of MXNet, CNTK or Theano.
 
-![TF-Logo](https://raw.githubusercontent.com/aniketmaurya/machine_learning/master/logo/tf-logo-rect.jpg)
 
 ## Building a simple image classifier
 
