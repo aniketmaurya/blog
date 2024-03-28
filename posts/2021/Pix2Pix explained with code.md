@@ -22,7 +22,7 @@ A tutorial on Pix2Pix Conditional GANs and implementation with PyTorch
 
 ![Pix2Pix example 01](https://ik.imagekit.io/aniket/blog/pix2pix/pix2pix-training_4eZEIv0Mo)
 
-Image to Image translation means transforming the given source image into a different image. Gray scale image to colour image conversion is one such example of image of image translation. 
+Image to Image translation means transforming the given source image into a different image. Gray scale image to colour image conversion is one such example of image of image translation.
 
 In this tutorial we will discuss GANs, a few points from Pix2Pix paper and implement the Pix2Pix network to translate segmented facade into real pictures.
 We will create the Pix2Pix model in PyTorch and use PyTorch lightning to avoid boilerplates.

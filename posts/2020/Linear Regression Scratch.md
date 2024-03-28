@@ -49,8 +49,8 @@ Y = list(map(lambda x: 2 * x + 5, X))
 
 repeat {
 
-    Ø = Ø - ∆J(Ø) = Ø - LR*1/m * sum((h(Ø, b) - Y)*X)    
-    
+    Ø = Ø - ∆J(Ø) = Ø - LR*1/m * sum((h(Ø, b) - Y)*X)
+
     b = b - ∆J(b) =  b - LR*1/m * sum((h(Ø, b) - Y))
 }
 
@@ -163,9 +163,9 @@ plt.show()
 ```
 
 
-    
+
 ![png](output_10_0.png)
-    
+
 
 
 

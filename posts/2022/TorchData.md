@@ -25,7 +25,7 @@ PyTorch 1.11 introduced a new library called `TorchData`, which provides common 
 For example, suppose we have an image dataset in a folder with a CSV mapping of classes, and we want to create a `DataLoader` that returns a batch of image tensors and labels. To do this, we need to take the following steps:
 
 1. Read and parse the CSV.
-2. 
+2.
     a. Get the image file path.
     b. Decode the label.
 3. Read the image.
@@ -157,54 +157,54 @@ for i, e in enumerate(dp):
 ```
 
 
-    
+
 ![png](output_12_0.png)
-    
+
 
 
     frog
 
 
 
-    
+
 ![png](output_12_2.png)
-    
+
 
 
     truck
 
 
 
-    
+
 ![png](output_12_4.png)
-    
+
 
 
     truck
 
 
 
-    
+
 ![png](output_12_6.png)
-    
+
 
 
     deer
 
 
 
-    
+
 ![png](output_12_8.png)
-    
+
 
 
     automobile
 
 
 
-    
+
 ![png](output_12_10.png)
-    
+
 
 
     automobile
@@ -277,13 +277,13 @@ trainer = flash.Trainer(max_epochs=3)
 trainer.fit(model, dl)
 ```
 
-    
+
       | Name          | Type           | Params
     -------------------------------------------------
-    0 | train_metrics | ModuleDict     | 0     
-    1 | val_metrics   | ModuleDict     | 0     
-    2 | test_metrics  | ModuleDict     | 0     
-    3 | adapter       | DefaultAdapter | 4.0 M 
+    0 | train_metrics | ModuleDict     | 0
+    1 | val_metrics   | ModuleDict     | 0
+    2 | test_metrics  | ModuleDict     | 0
+    3 | adapter       | DefaultAdapter | 4.0 M
     -------------------------------------------------
     4.0 M     Trainable params
     0         Non-trainable params

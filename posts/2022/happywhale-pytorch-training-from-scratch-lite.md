@@ -81,12 +81,12 @@ ax.set_xscale("log")
 ```
 
 
-    
+
 ![png](output_8_0.png)
-    
 
 
-And compare they with unique individuals... 
+
+And compare they with unique individuals...
 
 **Note:** that the counts are in log scale
 
@@ -115,9 +115,9 @@ ax = sn.heatmap(si[:500].T, cmap="BuGn", ax=fig.gca())
 ```
 
 
-    
+
 ![png](output_11_0.png)
-    
+
 
 
 And see the top individulas
@@ -132,9 +132,9 @@ ax = (
 ```
 
 
-    
+
 ![png](output_13_0.png)
-    
+
 
 
 ## Browse some images
@@ -154,9 +154,9 @@ for i, (name, dfg) in enumerate(df_train.groupby("species")):
 ```
 
 
-    
+
 ![png](output_15_0.png)
-    
+
 
 
 
@@ -347,12 +347,12 @@ for epoch in tqdm(range(1, num_epochs + 1)):
 
 
     Train Epoch: 1 [0/45929 (0%)]	Loss: 3.646841
-    
+
     Test set: Average loss: 0.0008, Accuracy: (0%)
-    
 
 
-## 👷 Scale Model Training 
+
+## 👷 Scale Model Training
 
 Our dry run was successful 🎉!
 Now, let's scale our training on a hardware accelerator like GPU or TPU. We can also use distributed training if multiple devices are available. For this purpose we use `LightningLite`, it scales PyTorch model training loop with minimal changes. That means we will retain the full control of our training loop! It also enables Precision support abd DDP training.
@@ -520,9 +520,9 @@ trainer.run(num_epochs=1, batch_size=128)
     Train Epoch: 1 [42112/45929 (92%)]	Loss: 0.447986
     Train Epoch: 1 [43392/45929 (94%)]	Loss: 0.355336
     Train Epoch: 1 [44672/45929 (97%)]	Loss: 0.368111
-    
+
     Test set: Average loss: 0.0030, Accuracy: (1%)
-    
+
 
 
 ## Happy Training! ⚡️🎉

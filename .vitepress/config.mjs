@@ -28,7 +28,7 @@ export default defineConfig({
               { text: 'TF.Data: Build data Pipelines', link: '/posts/2020/tf.data-Creating-Data-Input-Pipelines' },
               { text: 'DCGAN: Generate Fake Celebrity image', link: '/posts/2020/DCGAN' },
               { text: 'Deploy Machine Learning Web Apps for Free', link: '/posts/2020/deploy-python-heroku.md' },
-              
+
             ]
           },
           {
