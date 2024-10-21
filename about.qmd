@@ -7,7 +7,7 @@ about:
   links:
     - icon: twitter
       text: Twitter
-      href: https://twitter.com/aniketmaurya
+      href: https://x.com/aniketmaurya
     - icon: linkedin
       text: LinkedIn
       href: https://linkedin.com/in/aniketmaurya
