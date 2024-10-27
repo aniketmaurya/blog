@@ -14,6 +14,7 @@ image: /assets/ai-blog.jpg
 3. Karpathy's Reproduce GPT-2 (124M)
 4. Mantissa and Exponent
 5. Flash attention
+6. [Fineweb dataset](https://huggingface.co/spaces/HuggingFaceFW/blogpost-fineweb-v1)
 
 ## Questions
 
