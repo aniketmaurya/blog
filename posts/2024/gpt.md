@@ -1,5 +1,5 @@
 ---
-title: 'Idiots guide to Attention mechanism'
+title: 'Idiots guide to GPT, attention mechanism and coding LLMs from scratch'
 description: 'Notes, resources and questions on GPT and Attention mechanism'
 date: '2024-10-20'
 keywords: blog, writing
@@ -8,7 +8,12 @@ toc: false
 image: /assets/ai-blog.jpg
 ---
 
-
+## Roadmap
+1. Attention is all you need
+2. Karpathy's GPT-from-scratch
+3. Karpathy's Reproduce GPT-2 (124M)
+4. Mantissa and Exponent
+5. Flash attention
 
 ## Questions
 
